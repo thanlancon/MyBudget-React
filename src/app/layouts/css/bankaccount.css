@@ -1,0 +1,81 @@
+.bankaccountform {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.bankaccountform label {
+    width: 140px !important;
+}
+
+.bankaccountinput {
+    width: 200px;
+}
+
+.bankaccountform input {
+    width: 200px;
+}
+
+.bankaccountform select {
+    width: 200px;
+}
+
+.bankaccountform textarea {
+    width: 200px;
+    height: 50px;
+}
+
+/* bank account quickview style */
+.bankaccquickview {
+    display: grid !important;
+}
+
+.bankaccquickview>.listbanks>.row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    border-bottom: solid white;
+    height: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+.bankaccquickview>.listbanks>.row>.text {
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+.bankaccquickview>.listbanks>.row>.number {
+    text-align: right;
+    margin-right: 1em;
+    font-weight: bolder;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+.bankaccquickview>.title {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    visibility: hidden;
+    height: 0px;
+}
+
+.bankaccquickview>.title *:first-child {
+    flex-basis: 1000px;
+
+}
+.bankaccountname{
+    color: rgb(8, 213, 52);
+}
+.bankaccquickview>.title{
+    background-color:azure;
+}
+
+.bankaccountmodal{
+    width: 430px !important;
+}

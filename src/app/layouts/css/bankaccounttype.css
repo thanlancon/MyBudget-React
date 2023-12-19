@@ -1,0 +1,11 @@
+.bankaccounttypeform{
+    width:300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bankaccounttypemodal{
+    width: 350px !important;
+}
+.bankaccounttypeLabel{
+    width: 50px;
+}

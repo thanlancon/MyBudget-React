@@ -1,0 +1,37 @@
+.transactionform{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    width:700px;
+    display: flex;
+}
+.transactionform label{
+    width: 120px !important;
+    margin-left: 1em;
+}
+.tranInput{
+    width: 200px;
+    height: 30px !important;
+}
+.tranTextArea{
+    width: 530px;
+    height: 80px;
+}
+.tranDivLabel{
+    width: 133px;
+    display: flex;
+    align-items: center;
+}
+.transactionmodal{
+    width: 750px !important;
+}
+.tranTextArea{
+    width: 510px;
+}
+.currentTransaction{
+
+}
+.futureTransaction{
+    color:rgb(146, 166, 186);
+
+}

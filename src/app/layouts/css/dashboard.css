@@ -1,0 +1,66 @@
+.middletable {
+    display: block;
+}
+
+.middletable>thead {
+    background-color: beige;
+    color: red;
+}
+
+.middletable,
+th,
+td {
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 5px 10px 5px 10px;
+}
+
+th {
+    background-color: beige;
+    position: sticky;
+    top: 0;
+}
+
+
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+
+}
+
+tr:hover {
+    background-color: aquamarine !important;
+}
+
+.dashboardtitle {
+    grid-area: 'title';
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    background-color: rgb(226, 245, 245);
+    flex-basis: 2000px;
+}
+
+.dashboardtitle>:first-child {
+    color: blue;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.dashboardtitle>div {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.dashboardcontent {
+    display: flex;
+    justify-content: center;
+    height: 800px;
+    overflow-y: auto;
+}
