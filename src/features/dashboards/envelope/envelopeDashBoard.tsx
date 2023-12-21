@@ -6,14 +6,14 @@ import { useEffect } from "react";
 
 
 function EnvelopeDashBoard() {
-    const { envelopeStore } = useStore();
+    const { envelopeStore, globalStore } = useStore();
     const { isWaitingServerResponse } = envelopeStore;
-
+    const { getBudgetMonth, getBudgetYear } = globalStore;
 
     useEffect(() => {
-            envelopeStore.loadData(1, 1000);
-            envelopeStore.loadMonthlyEnvelopeBalances(10,2023);
-    }, [ envelopeStore]);
+        envelopeStore.loadData(1, 1000);
+        envelopeStore.loadMonthlyEnvelopeBalances(getBudgetMonth, getBudgetYear);
+    }, [envelopeStore, getBudgetMonth, getBudgetYear]);
     return (
         <div className='dashboard'>
             {isWaitingServerResponse && <LoadingComponent />}

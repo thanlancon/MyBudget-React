@@ -12,8 +12,10 @@ import CommonStore from "./commonStore";
 import UserStore from "./userStore";
 import ModalFormStore from "./modalFormStore";
 import FloatedMenuStore from "./floatedMenuStore";
+import { GlobalStore } from "./globalStore";
 
 interface Store {
+    globalStore: GlobalStore
     bankStore: BankStore
     bankAccountTypeStore: BankAccountTypeStore
     bankAccountStore: BankAccountStore
@@ -27,10 +29,12 @@ interface Store {
     commonStore: CommonStore
     userStore: UserStore
     modalFormStore: ModalFormStore
-    floatedMenuStore:FloatedMenuStore
+    floatedMenuStore: FloatedMenuStore
 }
 
 export const store: Store = {
+    globalStore:new GlobalStore(),
+
     bankStore: new BankStore(),
     bankAccountTypeStore: new BankAccountTypeStore(),
     bankAccountStore: new BankAccountStore(),
@@ -44,7 +48,7 @@ export const store: Store = {
     commonStore: new CommonStore(),
     userStore: new UserStore(),
     modalFormStore: new ModalFormStore(),
-    floatedMenuStore:new FloatedMenuStore()
+    floatedMenuStore: new FloatedMenuStore()
 }
 
 export const StoreContext = createContext(store);

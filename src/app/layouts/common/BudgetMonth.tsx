@@ -1,15 +1,33 @@
 import { observer } from "mobx-react-lite";
-import {  Select } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import { useStore } from "../../api/stores/stores";
+import '../css/common.css';
 
 function BudgetMonth() {
-    const months = Array.from({ length: 12 }, (_, i) => ({ value: i + 1, label: i + 1 }))
-    // function handleMonthChange(event:React.SyntheticEvent<HTMLElement,Event>,data:DropdownProps){
+    const { globalStore } = useStore();
+    const [selectedDate, setSelelectedDate] = useState(globalStore.budgetDate);
+    
+    useEffect(() => {
+        globalStore.budgetDate = selectedDate;
+    }, [globalStore.budgetDate, selectedDate]);
 
-    // }
     return (
         <>
-            <label>Month</label>
-            <Select options={months} name='value'  ></Select>
+            <div className="budgetMonthYearLabel">
+                <label>Budget Month</label>
+            </div>
+            <div>
+                <DatePicker
+                    className="budgetMonthYear"
+                    showMonthYearPicker
+                    showFullMonthYearPicker
+                    dateFormat={'MM/yyyy'}
+                    selected={selectedDate}
+                    placeholderText="Select Budget Month"
+                    onChange={(date) => setSelelectedDate(date)}
+                />
+            </div>
         </>
     );
 }

@@ -33,18 +33,21 @@ function App() {
       <Modalform />
       <ModalMenu />
       <div className='mainpage'>
-        <div className='toprow'>
+        <div className='toprowLeft'>
           <DropDownMenu />
+        </div>
+        <div className='toprowMiddle'>
           <BudgetMonth />
         </div>
-        <div className='mainleft' >
-          <BankAccountQuickView />
-        </div>
-        <div className='mainmiddle'>
-          <Outlet />
-        </div>
-        <div className='mainright'></div>
+        <div className='toprowRight'></div>
+      <div className='mainleft' >
+        <BankAccountQuickView />
       </div>
+      <div className='mainmiddle'>
+        <Outlet />
+      </div>
+      <div className='mainright'></div>
+    </div >
     </>
   )
 }

@@ -12,20 +12,32 @@ body {
     width: 100%;
     display: grid;
     grid-template-areas:
-        "top top top"
+        "topLeft topMiddle topRight"
         "left middle right";
     grid-template-columns: 350px 3fr 1fr;
-    grid-template-rows: 40px 1fr;
+    /* grid-template-rows: 40px 1fr; */
     min-height: 800px;
     overflow-y: auto;
 
 }
 
-.toprow {
-    grid-area: top;
+.toprowLeft {
+    grid-area: topLeft;
     display: grid;
-    grid-template-columns: 350px 100px 100px;
-    align-content: center;
+    height: 50px;
+    align-items: center;
+}
+
+.toprowMiddle {
+    grid-area: topMiddle;
+    display: grid;
+    grid-template-columns: 180px 200px 1fr;
+    height: 50px;
+    align-items: center;
+}
+
+.toprowRight {
+    background-color: inherit;
 }
 
 /* left column in main page */

@@ -13,7 +13,7 @@ function EnvelopeList() {
         <div className='envelopelist'>
             <div className="envelopeListTitle">
                 <div></div>
-                <div>Monthly Balance</div>
+                <div>Balance Of Month</div>
                 <div>Total Balance</div>
                 <div></div>
             </div>
