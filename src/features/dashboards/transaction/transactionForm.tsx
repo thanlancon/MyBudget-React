@@ -55,7 +55,8 @@ function TransactionForm() {
             const response = await createItem(statedItem);
             if (response) {
                 setSelectedItem();
-                // bankAccountStore.loadData();
+
+                transactionStore.loadData(1, 30);
             }
             handleServerResponse(response);
         }
@@ -64,7 +65,7 @@ function TransactionForm() {
         const { name, value } = event.target;
         setStatedItem({ ...statedItem, [name]: value });
     }
-    function handleSelect(event: React.SyntheticEvent<HTMLElement, Event>,data: DropdownProps) {
+    function handleSelect(event: React.SyntheticEvent<HTMLElement, Event>, data: DropdownProps) {
         event;
         const { name, value } = data;
         setStatedItem({ ...statedItem, [name]: value ? value : NIL_UUID });
@@ -73,7 +74,7 @@ function TransactionForm() {
         readOnlyListStore.loadPayees();
         setOpenPayeeForm(false);
     }
-    function handleAddPayee(){
+    function handleAddPayee() {
         setOpenPayeeForm(true);
         readOnlyListStore.loadPayees(true);
     }

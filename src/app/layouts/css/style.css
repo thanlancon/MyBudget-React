@@ -15,8 +15,7 @@ body {
         "topLeft topMiddle topRight"
         "left middle right";
     grid-template-columns: 350px 3fr 1fr;
-    /* grid-template-rows: 40px 1fr; */
-    min-height: 800px;
+    grid-template-rows: 50px 1fr;
     overflow-y: auto;
 
 }
@@ -52,6 +51,7 @@ body {
     grid-area: middle;
     background-color: rgb(222, 235, 245);
     overflow-y: auto;
+    height: calc(100vh-50px);
 }
 
 /* right area/column in main page */

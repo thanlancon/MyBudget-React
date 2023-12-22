@@ -7,18 +7,18 @@ import { PagingParams } from "../../../app/api/core/pagination";
 import InfiniteScroll from "react-infinite-scroller";
 
 function CategoryDashBoard() {
-    const { categoryStore } = useStore();
+    const { categoryStore ,globalStore} = useStore();
     const { isWaitingServerResponse } = categoryStore;
     const { loadData, setPagingParams, pagination } = categoryStore;
     const [loadingNext, setLoadingNext] = useState(false);
 
     useEffect(() => {
-        categoryStore.loadData(1, 100);
+        categoryStore.loadData(1, globalStore.getDefaultItemPerPage);
     }, [])
 
     function handleGetNextPage() {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, 30));
+        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
         loadData().then(() => setLoadingNext(false));
     }
 

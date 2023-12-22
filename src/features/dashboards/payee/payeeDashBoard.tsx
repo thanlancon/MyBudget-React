@@ -7,18 +7,18 @@ import { PagingParams } from "../../../app/api/core/pagination";
 import InfiniteScroll from "react-infinite-scroller";
 
 function EnvelopeDashBoard() {
-    const { payeeStore } = useStore();
+    const { payeeStore,globalStore } = useStore();
     const { isWaitingServerResponse } = payeeStore;
     const { loadData, setPagingParams, pagination } = payeeStore;
     const [loadingNext, setLoadingNext] = useState(false);
 
     useEffect(() => {
-        payeeStore.loadData(1, 30);
+        payeeStore.loadData(1, globalStore.getDefaultItemPerPage);
     }, [])
 
     function handleGetNextPage() {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, 30));
+        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
         loadData().then(() => setLoadingNext(false));
     }
 

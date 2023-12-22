@@ -71,42 +71,43 @@ export class TransactionStore {
 
 
     }
-    setArray = (array: Transaction[]) => {
-        this.transactions = [];
-        this.transactions = [...array];
-        this.transactions = this.sortArray(this.transactions);
-    }
+
     addTransaction = (transaction: Transaction) => {
         this.transactions = [...this.transactions.filter(x => x.id !== transaction.id), transaction];
     }
+    clearTransactions = () => {
+        this.transactions = [];
+    }
     loadData = async (pagenumber: number = -1, pagesize: number = -1) => {
-        if (pagenumber !== -1 && pagesize !== -1) {
-            this.setPagingParams(new PagingParams(pagenumber, pagesize));
-        }
-        this.setIsLoadingData(true);
+        try {
+            if (pagenumber !== -1 && pagesize !== -1) {
+                this.setPagingParams(new PagingParams(pagenumber, pagesize));
+            }
 
-        var transactions: Transaction[] = [];
-        if (this._bankId !== NIL_UUID) {
-            const response = await Agent.Transactions.list(this.axiosParams);
+            this.setIsLoadingData(true);
 
-            if (response.isSuccess) {
+            var transactions: Transaction[] = [];
+            if (this._bankId !== NIL_UUID) {
+                const response = await Agent.Transactions.list(this.axiosParams);
 
-                transactions = <Transaction[]>response.data;
-                transactions.forEach(transaction => {
-                    this.addTransaction(transaction);
-                });
-                this.setPagination(response.pagination);
+                if (response.isSuccess) {
+                    
+                    transactions = <Transaction[]>response.data;
+                    transactions.forEach(transaction => {
+                        this.addTransaction(transaction);
+                    });
+                    this.setPagination(response.pagination);
+                    this.setIsLoadingData(false);
+                }
+            }
+            else{
+                this.clearTransactions();
                 this.setIsLoadingData(false);
             }
         }
-        try {
-            // runInAction(() => {
-            //     this.setArray(transactions);
-            // })
-        }
         catch (error) {
-            console.log(error);
             this.setIsLoadingData(false);
+            handleError(error);
         }
     }
     setPagination = (pagination: Pagination | null) => {
@@ -118,10 +119,12 @@ export class TransactionStore {
     setEmptyTransaction = () => {
         this.setSelectedItem();
     }
-    reloadData = async (bankID = NIL_UUID, pageNumber = 1, pageSize = 30) => {
+    //load data base on existed pagination, but pagenumber = 1
+    reloadData = async () => {
+        const pageNumber = 1;
+        const pageSize = this.pagination?.itemsPerPage ? this.pagination.itemsPerPage : 30;
         this.setIsLoadingData(true);
         this.setPagingParams(new PagingParams(pageNumber, pageSize));
-        this.bankID = bankID;
         await this.loadData();
         this.setIsLoadingData(false);
     }
@@ -151,7 +154,7 @@ export class TransactionStore {
     createItem = async (item: Transaction) => {
         this.setIsLoadingData();
         try {
-            const copyItem = {...item};
+            const copyItem = { ...item };
             // postedItem.id = uuid4();
             const response = await Agent.Transactions.create(copyItem);
             runInAction(() => {

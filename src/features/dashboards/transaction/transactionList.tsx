@@ -19,6 +19,12 @@ function TransactionList() {
         readOnlyListStore.loadPayees();
     }, []);
 
+    // useEffect(()=>{
+    //     if(!isOpen){
+    //         loadTransactions();
+    //     }
+    // },[isOpen]);
+
     function loadTransactions() {
         transactionStore.loadData(1, 30);
     }
@@ -48,15 +54,12 @@ function TransactionList() {
         event.preventDefault();
         const createMenu = () => {
             handleOpenForm();
-            loadTransactions();
         };
         const editMenu = () => {
             handleOpenForm(id);
-            loadTransactions();
         };
         const deleteMenu = () => {
             handleDelete(id);
-            loadTransactions();
         }
         const x = event.pageX;
         const y = event.pageY;
@@ -86,7 +89,7 @@ function TransactionList() {
                 </thead>
                 <tbody>
                     {transactions.map(b => (
-                        <tr key={b.id} onContextMenu={showMenu(b.id)} className={isFutureDate(b.transactionDate) ? 'futureTransaction':'currentTransaction'}>
+                        <tr key={b.id} onContextMenu={showMenu(b.id)} className={isFutureDate(b.transactionDate) ? 'futureTransaction' : 'currentTransaction'}>
                             <td>{dateToString(b.transactionDate)}</td>
                             <td>{dateToString(b.postDate)}</td>
                             <td>{bankAccounts.find(x => x.value === b.bankId)?.text}</td>

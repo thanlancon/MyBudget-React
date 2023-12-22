@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { NIL as NIL_UUID } from "uuid";
 
 function TransactionDashBoard() {
-    const { transactionStore } = useStore();
+    const { transactionStore,globalStore } = useStore();
     const { isWaitingServerResponse } = transactionStore;
     const { loadData, setPagingParams, pagination } = transactionStore;
     const [loadingNext, setLoadingNext] = useState(false);
@@ -17,12 +17,12 @@ function TransactionDashBoard() {
 
     useEffect(() => {
         transactionStore.bankID = bankid ? bankid : NIL_UUID;
-        transactionStore.loadData(1, 30);
+        transactionStore.loadData(1, globalStore.getDefaultItemPerPage);
     }, [bankid]);
 
     const handleGetNextPage=()=> {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, 30));
+        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
         loadData().then(() => setLoadingNext(false));
     }
 

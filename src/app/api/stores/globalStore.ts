@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx"
 //this store content things that are used for all store
 export class GlobalStore {
     budgetDate: Date | null = null
-
+    defaultItemPerPage:number=50;
     constructor() {
         this.budgetDate = new Date(Date.now());
         makeAutoObservable(this);
@@ -15,5 +15,8 @@ export class GlobalStore {
     get getBudgetYear() {
         if (this.budgetDate === null) return 0;
         return this.budgetDate.getFullYear();
+    }
+    get getDefaultItemPerPage(){
+        return this.defaultItemPerPage;
     }
 }

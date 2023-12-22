@@ -7,7 +7,7 @@ import { PagingParams } from "../../../app/api/core/pagination";
 import InfiniteScroll from "react-infinite-scroller";
 
 function BankAccountTypeDashBoard() {
-    const { bankAccountTypeStore } = useStore();
+    const { bankAccountTypeStore,globalStore } = useStore();
     const { isWaitingServerResponse } = bankAccountTypeStore;
     const { loadData, setPagingParams, pagination } = bankAccountTypeStore;
     const [loadingNext, setLoadingNext] = useState(false);
@@ -18,7 +18,7 @@ function BankAccountTypeDashBoard() {
 
     function handleGetNextPage() {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, 30));
+        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
         loadData().then(() => setLoadingNext(false));
     }
 

@@ -9,19 +9,19 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 
 export default observer(function BankDashBoard() {
-    const { bankStore } = useStore();
+    const { bankStore,globalStore } = useStore();
     const { isWaitingServerResponse } = bankStore;
 
     const { loadData, setPagingParams, pagination } = bankStore;
     const [loadingNext, setLoadingNext] = useState(false);
 
     useEffect(() => {
-        bankStore.loadData(1, 30);
+        bankStore.loadData(1, globalStore.getDefaultItemPerPage);
     }, [])
 
     function handleGetNextPage() {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, 30));
+        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
         loadData().then(() => setLoadingNext(false));
     }
 

@@ -61,6 +61,6 @@ tr:hover {
 .dashboardcontent {
     display: flex;
     justify-content: center;
-    height: 800px;
     overflow-y: auto;
+    height: calc(100vh - 150px);
 }

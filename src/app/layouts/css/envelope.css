@@ -16,7 +16,7 @@
     color: blue;
 }
 
-.envelopelist>.body>.categoryrow {
+.categoryrow {
     display: grid;
     width: 100%;
     font-weight: bold;
@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-.envelopelist>.body>.enveloperow {
+.enveloperow {
     width: 100%;
     height: 40px;
     display: grid;
