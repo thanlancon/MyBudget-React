@@ -4,26 +4,26 @@ import LoadingComponent from "../../../app/layouts/common/loadingcomponent";
 import TransactionList from "./transactionList";
 import InfiniteScroll from 'react-infinite-scroller';
 import { useEffect, useState } from "react";
-import { PagingParams } from "../../../app/api/core/pagination";
 import { useParams } from "react-router-dom";
 import { NIL as NIL_UUID } from "uuid";
 
 function TransactionDashBoard() {
     const { transactionStore,globalStore } = useStore();
     const { isWaitingServerResponse } = transactionStore;
-    const { loadData, setPagingParams, pagination } = transactionStore;
+    const { loadData, pagination } = transactionStore;
     const [loadingNext, setLoadingNext] = useState(false);
     let { bankid } = useParams();
 
     useEffect(() => {
         transactionStore.bankID = bankid ? bankid : NIL_UUID;
-        transactionStore.loadData(1, globalStore.getDefaultItemPerPage);
     }, [bankid]);
 
+    useEffect(()=>{
+        transactionStore.loadData(1,globalStore.getDefaultItemPerPage);
+    },[bankid]);
     const handleGetNextPage=()=> {
         setLoadingNext(true);
-        setPagingParams(new PagingParams(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage));
-        loadData().then(() => setLoadingNext(false));
+        loadData(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage).then(() => setLoadingNext(false));
     }
 
     return (

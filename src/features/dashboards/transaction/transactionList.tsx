@@ -9,7 +9,7 @@ import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
 
 function TransactionList() {
 
-    const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore } = useStore();
+    const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore,globalStore } = useStore();
     const { transactions, deleteItem } = transactionStore;
     const { bankAccounts, payees, envelopes } = readOnlyListStore;
 
@@ -19,14 +19,8 @@ function TransactionList() {
         readOnlyListStore.loadPayees();
     }, []);
 
-    // useEffect(()=>{
-    //     if(!isOpen){
-    //         loadTransactions();
-    //     }
-    // },[isOpen]);
-
     function loadTransactions() {
-        transactionStore.loadData(1, 30);
+        transactionStore.loadData(1, globalStore.getDefaultItemPerPage);
     }
     function isFutureDate(date: Date | undefined | null) {
         if (!date) return true;
@@ -56,7 +50,8 @@ function TransactionList() {
             handleOpenForm();
         };
         const editMenu = () => {
-            handleOpenForm(id);
+            // handleOpenForm(id);
+            alert('Transaction cannot be modified!');
         };
         const deleteMenu = () => {
             handleDelete(id);

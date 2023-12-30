@@ -134,10 +134,10 @@ function CategoryEnvelopes({ category }: Props) {
                     b.categoryId === category.value &&
                     <div className='enveloperow' key={b.id} onContextMenu={showEnvelopeMenu(b.id, b.name)}>
                         <div className='name' >{b.name}</div>
-                        <div className='number'                        >
+                        <div className='number'>
                             {formatCurrencyNumber(FindMonthlyBalance(b.id))}
                         </div>
-                        <div className='number'
+                        <div className={`number ${b.totalBalance > 0 ? 'possitivecurrency' : b.totalBalance < 0 ? 'negativecurrency' : ''}`}
                             onClick={() => handleFundTransfer(b.id)}
                         >
                             {formatCurrencyNumber(b.totalBalance)}

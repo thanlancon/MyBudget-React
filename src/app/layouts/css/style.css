@@ -174,3 +174,9 @@ label {
     z-index: 1000;
     padding: 10px;
 }
+.negativecurrency{
+    color: red;
+}
+.possitivecurrency{
+    color: blue;
+}
