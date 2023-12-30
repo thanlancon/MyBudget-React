@@ -21,6 +21,7 @@ function TransactionDashBoard() {
     useEffect(()=>{
         transactionStore.loadData(1,globalStore.getDefaultItemPerPage);
     },[bankid]);
+    
     const handleGetNextPage=()=> {
         setLoadingNext(true);
         loadData(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage).then(() => setLoadingNext(false));

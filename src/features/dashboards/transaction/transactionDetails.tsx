@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NIL as NIL_UUID } from 'uuid';
 import "../../../../public/myfunctions"
 import { dateToString } from "../../../../public/myfunctions";
-import { useEffect } from "react";
 
 function TransactionDetails() {
 
@@ -12,12 +11,6 @@ function TransactionDetails() {
     const { selectedItem } = transactionStore;
 
     const { bankAccounts, envelopes, payees } = readOnlyListStore;
-
-    useEffect(()=>{
-        readOnlyListStore.loadBankAccounts();
-        readOnlyListStore.loadEnvelopes();
-        readOnlyListStore.loadPayees();
-    },[]);
 
     var itemDetail = selectedItem ?? {
         id: NIL_UUID,

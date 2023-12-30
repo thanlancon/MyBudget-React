@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { Button, DropdownProps, Form, Icon, Modal, ModalContent } from "semantic-ui-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NIL as NIL_UUID } from 'uuid';
@@ -19,12 +19,6 @@ function TransactionForm() {
     const { bankAccounts, envelopes, payees } = readOnlyListStore;
 
     const [openPayeeForm, setOpenPayeeForm] = useState(false);
-
-    useEffect(() => {
-        readOnlyListStore.loadBankAccounts();
-        readOnlyListStore.loadEnvelopes();
-        readOnlyListStore.loadPayees();
-    }, []);
 
     var emptyTransaction = {
         id: NIL_UUID,

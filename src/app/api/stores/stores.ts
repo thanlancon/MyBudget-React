@@ -13,6 +13,7 @@ import UserStore from "./userStore";
 import ModalFormStore from "./modalFormStore";
 import FloatedMenuStore from "./floatedMenuStore";
 import { GlobalStore } from "./globalStore";
+import { MonthlyTransactionStore } from "./monthlyTransactionStore";
 
 interface Store {
     globalStore: GlobalStore
@@ -23,6 +24,7 @@ interface Store {
     envelopeStore: EnvelopeStore
     payeeStore: PayeeStore
     transactionStore: TransactionStore
+    monthlyTransactionStore: MonthlyTransactionStore
 
     readOnlyListStore: ReadOnlyListStore
     mainDashBoardStore: MainDaskBoardStore
@@ -42,7 +44,7 @@ export const store: Store = {
     envelopeStore: new EnvelopeStore(),
     payeeStore: new PayeeStore(),
     transactionStore: new TransactionStore(),
-
+    monthlyTransactionStore:new MonthlyTransactionStore(),
     readOnlyListStore: new ReadOnlyListStore(),
     mainDashBoardStore: new MainDaskBoardStore(),
     commonStore: new CommonStore(),

@@ -1,5 +1,5 @@
 import {
-  createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import App from "../../layouts/App";
 import EnvelopeDashBoard from "../../../features/dashboards/envelope/envelopeDashBoard";
@@ -8,34 +8,35 @@ import Bankdashboard from "../../../features/dashboards/bank/bankdashboard";
 import BankAccountTypeDashBoard from "../../../features/dashboards/bankaccounttype/bankAccountTypeDashBoard";
 import CategoryDashBoard from "../../../features/dashboards/category/categoryDashBoard";
 import PayeeDashBoard from "../../../features/dashboards/payee/payeeDashBoard";
+import { RouterURL } from "./routerURL";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App/>,
     children:[
         {
-            path:"banks",
+            path:RouterURL.pathBanks,
             element:<Bankdashboard/>
         },
         {
-            path:"bankaccounttypes",
+            path:RouterURL.pathBankAccountTypes,
             element:<BankAccountTypeDashBoard/>
         },
         {
-            path:"categories",
+            path:RouterURL.pathCategories,
             element:<CategoryDashBoard/>
         },
         {
-            path:"envelopes",
+            path:RouterURL.pathEnvelopes,
             element:<EnvelopeDashBoard/>
         },
         {
-            path:"payees",
+            path:RouterURL.pathPayees,
             element:<PayeeDashBoard/>
         },
         {
-            path:"transactions/bank/:bankid",
+            path:RouterURL.pathTransactions,
             element:<TransactionDashBoardPaging/>
         }
     ]

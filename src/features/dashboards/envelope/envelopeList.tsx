@@ -1,14 +1,11 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
-import { useEffect } from "react";
 import CategoryEnvelopes from "./categoryEnvelopes";
 
 function EnvelopeList() {
     const {  readOnlyListStore } = useStore();
     const { categories } = readOnlyListStore;
-    useEffect(() => {
-        readOnlyListStore.loadCategories();
-    }, []);
+
     return (
         <div className='envelopelist'>
             <div className="envelopeListTitle">

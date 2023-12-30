@@ -207,6 +207,7 @@ const Envelopes = {
 const linkTransaction = '/transactions';
 const Transactions = {
     list: (params: URLSearchParams): Promise<PaginatedResult<Transaction[]>> => requests.getpaging(`${linkTransaction}`, params),
+    getMonthlyWithEvelope: (params: URLSearchParams): Promise<PaginatedResult<Transaction[]>> => requests.getpaging(`${linkTransaction}/monthly`, params),
     details: (id: string): Promise<Result<Transaction>> => requests.get(`${linkTransaction}/${id}`),
     update: (dataItem: Transaction): Promise<Result<string>> => requests.put(`${linkTransaction}/${dataItem.id}`, dataItem),
     create: (dataItem: Transaction): Promise<Result<string>> => requests.post(`${linkTransaction}`, dataItem),

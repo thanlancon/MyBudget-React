@@ -7,13 +7,17 @@ import { UserFormValues } from '../models/user';
 import Modalform from './common/modalform';
 import ModalMenu from './common/modalMenu';
 import { Outlet } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BudgetMonth from './common/BudgetMonth';
+import MonthlyWithEnvelope from '../../features/dashboards/transaction/MonthlyWithEnvelope';
+import { RouterURL } from '../api/routers/routerURL';
 
 function App() {
 
-  const { userStore } = useStore();
+  const { userStore, globalStore, monthlyTransactionStore } = useStore();
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   useEffect(() => {
     const creds: UserFormValues = {
@@ -28,6 +32,13 @@ function App() {
   useEffect(() => {
     navigate('envelopes');
   }, [])
+
+  useEffect(() => {
+    if (location.pathname !== RouterURL.pathEnvelopes) {
+      globalStore.setShowMonthlyTransaction(false);
+      monthlyTransactionStore.clearTransactions();
+    }
+  }, [location.pathname]);
   return (
     <>
       <Modalform />
@@ -40,14 +51,17 @@ function App() {
           <BudgetMonth />
         </div>
         <div className='toprowRight'></div>
-      <div className='mainleft' >
-        <BankAccountQuickView />
-      </div>
-      <div className='mainmiddle'>
-        <Outlet />
-      </div>
-      <div className='mainright'></div>
-    </div >
+        <div className='mainleft' >
+          <BankAccountQuickView />
+        </div>
+        <div className='mainmiddle'>
+          <Outlet />
+        </div>
+        <div className='mainright'>
+          {globalStore.isShowMonthlyTransaction
+            && <MonthlyWithEnvelope />}
+        </div>
+      </div >
     </>
   )
 }

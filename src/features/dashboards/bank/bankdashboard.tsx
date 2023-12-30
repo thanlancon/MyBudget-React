@@ -25,8 +25,6 @@ export default observer(function BankDashBoard() {
         loadData().then(() => setLoadingNext(false));
     }
 
-
-
     return (
         <div className='dashboard'>
             {isWaitingServerResponse && <LoadingComponent />}

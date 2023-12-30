@@ -6,6 +6,7 @@ import { handleError } from "../handleresponemessage";
 import Result from "../core/result";
 import { Pagination, PagingParams } from "../core/pagination";
 
+
 export class TransactionStore {
     transactions: Transaction[] = [];
     selectedItem: Transaction | undefined = undefined;
@@ -15,7 +16,6 @@ export class TransactionStore {
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
 
-
     constructor() {
         makeAutoObservable(this);
     }
@@ -24,7 +24,7 @@ export class TransactionStore {
     }
     set bankID(value: string) {
         this._bankId = value;
-        this.transactions = [];
+        this.clearTransactions();
     }
     get axiosParams() {
         const params = new URLSearchParams();
@@ -34,6 +34,7 @@ export class TransactionStore {
 
         return params;
     }
+
     setIsLoadingData = (state: boolean = true) => {
         this.isWaitingServerResponse = state;
     }
@@ -68,8 +69,6 @@ export class TransactionStore {
 
             return 0;
         })];
-
-
     }
 
     addTransaction = (transaction: Transaction) => {
@@ -91,7 +90,7 @@ export class TransactionStore {
                 const response = await Agent.Transactions.list(this.axiosParams);
 
                 if (response.isSuccess) {
-                    
+                    this.clearTransactions();
                     transactions = <Transaction[]>response.data;
                     transactions.forEach(transaction => {
                         this.addTransaction(transaction);
@@ -99,8 +98,12 @@ export class TransactionStore {
                     this.setPagination(response.pagination);
                     this.setIsLoadingData(false);
                 }
+                else {
+                    this.clearTransactions();
+                    this.setIsLoadingData(false);
+                }
             }
-            else{
+            else {
                 this.clearTransactions();
                 this.setIsLoadingData(false);
             }

@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/api/stores/stores";
 import { formatCurrencyNumber } from "../../../../public/myfunctions";
 import { NIL as NIL_UUID } from "uuid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DropdownProps, Select } from "semantic-ui-react";
 import handleServerResponse, { handleError } from "../../../app/api/handleresponemessage";
 import EnvelopeBalanceTransfer from "../../../app/models/envelopeBalanceTransfer";
@@ -18,9 +18,7 @@ function EnvelopeTransferFund() {
         balanceTransfer: 0
     };
     const [statedItem, setStatedItem] = useState(initialTransfer);
-    useEffect(() => {
-        readOnlyListStore.loadEnvelopes();
-    }, []);
+
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         setStatedItem({ ...statedItem, [name]: value });

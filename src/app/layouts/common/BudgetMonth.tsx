@@ -5,13 +5,18 @@ import { useStore } from "../../api/stores/stores";
 import '../css/common.css';
 
 function BudgetMonth() {
-    const { globalStore } = useStore();
+    const { globalStore,monthlyTransactionStore } = useStore();
     const [selectedDate, setSelelectedDate] = useState(globalStore.budgetDate);
-    
-    useEffect(() => {
-        globalStore.budgetDate = selectedDate;
-    }, [globalStore.budgetDate, selectedDate]);
 
+    useEffect(() => {
+        globalStore.setBudgetDate(selectedDate);
+    }, [selectedDate]);
+
+    function handleDateChange(date:Date | null){
+        setSelelectedDate(date);
+        globalStore.setShowMonthlyTransaction(false);
+        monthlyTransactionStore.clearTransactions();
+    }
     return (
         <>
             <div className="budgetMonthYearLabel">
@@ -25,7 +30,7 @@ function BudgetMonth() {
                     dateFormat={'MM/yyyy'}
                     selected={selectedDate}
                     placeholderText="Select Budget Month"
-                    onChange={(date) => setSelelectedDate(date)}
+                    onChange={(date) => handleDateChange(date)}
                 />
             </div>
         </>

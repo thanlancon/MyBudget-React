@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { dateToString, formatCurrencyNumber } from "../../../../public/myfunctions";
 import handleServerResponse from "../../../app/api/handleresponemessage";
-import { MouseEventHandler, useEffect } from "react";
+import { MouseEventHandler } from "react";
 import TransactionForm from "./transactionForm";
 import { NIL as NIL_UUID } from "uuid";
 import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
@@ -12,12 +12,6 @@ function TransactionList() {
     const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore,globalStore } = useStore();
     const { transactions, deleteItem } = transactionStore;
     const { bankAccounts, payees, envelopes } = readOnlyListStore;
-
-    useEffect(() => {
-        readOnlyListStore.loadBankAccounts();
-        readOnlyListStore.loadEnvelopes();
-        readOnlyListStore.loadPayees();
-    }, []);
 
     function loadTransactions() {
         transactionStore.loadData(1, globalStore.getDefaultItemPerPage);

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { DropdownProps, Select } from "semantic-ui-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import handleServerResponse, { handleError } from "../../../app/api/handleresponemessage";
 import { NIL as NIL_UUID } from "uuid";
 
@@ -12,11 +12,6 @@ function EnvelopeForm() {
         , createItem, updateItem } = envelopeStore;
 
     const { categories,envelopes } = readOnlyListStore;
-
-    useEffect(() => {
-        readOnlyListStore.loadCategories();
-        readOnlyListStore.loadEnvelopes();
-    }, []);
 
     var initialItem = {
         id: '',

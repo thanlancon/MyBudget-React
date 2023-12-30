@@ -9,10 +9,7 @@ export default observer(function BankAccountForm() {
     const { createItem, updateItem } = bankAccountStore;
     const { banks, bankAccountTypes } = readOnlyListStore;
 
-    useEffect(()=>{
-        readOnlyListStore.loadBanks();
-        readOnlyListStore.loadBankAccountTypes();
-    },[]);
+    
     var initialItem = {
         id: '',
         code: '',

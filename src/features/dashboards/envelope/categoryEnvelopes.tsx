@@ -14,7 +14,7 @@ interface Props {
     category: ValueAndText
 }
 function CategoryEnvelopes({ category }: Props) {
-    const { envelopeStore, categoryStore, modalFormStore, floatedMenuStore } = useStore();
+    const { envelopeStore, categoryStore, modalFormStore, floatedMenuStore, monthlyTransactionStore, globalStore } = useStore();
     const { envelopes, monthlyEnvelopeBalances, deleteItem, setSelectedItem } = envelopeStore;
     const [showEnvelopes, setShowEnvelopes] = useState(true);
 
@@ -124,6 +124,13 @@ function CategoryEnvelopes({ category }: Props) {
         }
         return balance;
     }
+    function handleEnvelopeNameClick(envelopeID: string) {
+        const month = globalStore.getBudgetMonth;
+        const year = globalStore.getBudgetYear;
+
+        monthlyTransactionStore.loadData(month, year, envelopeID);
+        globalStore.setShowMonthlyTransaction(true);
+    }
     return (
         <>
             <div className='categoryrow' key={category.value} onContextMenu={showCategoryMenu(category.value, category.text)}
@@ -132,7 +139,10 @@ function CategoryEnvelopes({ category }: Props) {
             {showEnvelopes &&
                 envelopes.map(b => (
                     b.categoryId === category.value &&
-                    <div className='enveloperow' key={b.id} onContextMenu={showEnvelopeMenu(b.id, b.name)}>
+                    <div className='enveloperow' key={b.id}
+                        onContextMenu={showEnvelopeMenu(b.id, b.name)}
+                        onClick={() => handleEnvelopeNameClick(b.id)}
+                    >
                         <div className='name' >{b.name}</div>
                         <div className='number'>
                             {formatCurrencyNumber(FindMonthlyBalance(b.id))}
@@ -143,7 +153,7 @@ function CategoryEnvelopes({ category }: Props) {
                             {formatCurrencyNumber(b.totalBalance)}
                         </div>
 
-                    </div>
+                    </div >
                 ))
             }
         </>
