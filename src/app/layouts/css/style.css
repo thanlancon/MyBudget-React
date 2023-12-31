@@ -57,7 +57,8 @@ body {
 /* right area/column in main page */
 .mainright {
     grid-area: right;
-    /* background-color: #EDF1F5; */
+    display: grid;
+    justify-content: center;
 }
 
 /* date picker with label in a row

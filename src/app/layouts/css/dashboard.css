@@ -1,13 +1,14 @@
-.middletable {
+table {
     display: block;
 }
 
-.middletable>thead {
-    background-color: beige;
-    color: red;
+thead[class='dashboardthead']{
+    background-color: blanchedalmond;
+    position: sticky;
+    top: 0;
 }
 
-.middletable,
+table,
 th,
 td {
     border: solid 1px black;
@@ -18,14 +19,6 @@ th,
 td {
     padding: 5px 10px 5px 10px;
 }
-
-th {
-    background-color: beige;
-    position: sticky;
-    top: 0;
-}
-
-
 
 .dashboard {
     display: grid;

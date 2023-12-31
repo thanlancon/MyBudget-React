@@ -1,0 +1,9 @@
+.monthlyenvelope {
+    font-size: 8pt;
+    width: 100% !important;
+    border: 0;
+}
+
+.monthlyenvelope>thead {
+    background-color: rgb(147, 186, 243);
+}

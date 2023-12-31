@@ -63,7 +63,7 @@ function TransactionList() {
     return (
         <>
             <table className='middletable autowidth' >
-                <thead>
+                <thead className='dashboardthead'>
                     <tr>
                         <th>Tran. Date</th>
                         <th>Post. Date</th>
