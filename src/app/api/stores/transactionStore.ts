@@ -90,7 +90,6 @@ export class TransactionStore {
                 const response = await Agent.Transactions.list(this.axiosParams);
 
                 if (response.isSuccess) {
-                    this.clearTransactions();
                     transactions = <Transaction[]>response.data;
                     transactions.forEach(transaction => {
                         this.addTransaction(transaction);
@@ -128,6 +127,7 @@ export class TransactionStore {
         const pageSize = this.pagination?.itemsPerPage ? this.pagination.itemsPerPage : 30;
         this.setIsLoadingData(true);
         this.setPagingParams(new PagingParams(pageNumber, pageSize));
+        this.clearTransactions();
         await this.loadData();
         this.setIsLoadingData(false);
     }

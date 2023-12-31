@@ -65,7 +65,6 @@ export class MonthlyTransactionStore {
 
             if (response.isSuccess) {
                 transactions = <Transaction[]>response.data;
-                this.clearTransactions();
                 transactions.forEach(transaction => {
                     this.addTransaction(transaction);
                 });
@@ -98,6 +97,7 @@ export class MonthlyTransactionStore {
         const pageSize = this.pagination?.itemsPerPage ? this.pagination.itemsPerPage : 30;
         this.setIsLoadingData(true);
         this.setPagingParams(new PagingParams(pageNumber, pageSize));
+        this.clearTransactions();
         await this.loadData(this.month, this.year, this._envelopeID);
         this.setIsLoadingData(false);
     }

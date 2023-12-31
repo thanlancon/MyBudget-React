@@ -14,7 +14,7 @@ body {
     grid-template-areas:
         "topLeft topMiddle topRight"
         "left middle right";
-    grid-template-columns: 350px 3fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 50px 1fr;
     overflow-y: auto;
 
@@ -30,7 +30,7 @@ body {
 .toprowMiddle {
     grid-area: topMiddle;
     display: grid;
-    grid-template-columns: 180px 200px 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     height: 50px;
     align-items: center;
 }

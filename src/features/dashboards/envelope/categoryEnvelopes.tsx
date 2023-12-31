@@ -127,7 +127,7 @@ function CategoryEnvelopes({ category }: Props) {
     function handleEnvelopeNameClick(envelopeID: string) {
         const month = globalStore.getBudgetMonth;
         const year = globalStore.getBudgetYear;
-
+        monthlyTransactionStore.clearTransactions();
         monthlyTransactionStore.loadData(month, year, envelopeID);
         globalStore.setShowMonthlyTransaction(true);
     }
