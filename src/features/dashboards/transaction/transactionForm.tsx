@@ -65,12 +65,11 @@ function TransactionForm() {
         setStatedItem({ ...statedItem, [name]: value ? value : NIL_UUID });
     }
     function handleClosePayeeForm() {
-        readOnlyListStore.loadPayees();
+        readOnlyListStore.loadPayees(true);
         setOpenPayeeForm(false);
     }
     function handleAddPayee() {
         setOpenPayeeForm(true);
-        readOnlyListStore.loadPayees(true);
     }
     return (
         <div className='transactionform'>

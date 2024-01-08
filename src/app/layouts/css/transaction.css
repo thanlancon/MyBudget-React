@@ -28,9 +28,9 @@
 .tranTextArea{
     width: 510px;
 }
-.currentTransaction{
+/* .currentTransaction{
 
-}
+} */
 .futureTransaction{
     color:rgb(146, 166, 186);
 }
