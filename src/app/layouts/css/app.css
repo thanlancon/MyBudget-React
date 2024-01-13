@@ -8,6 +8,7 @@ body {
 
 /* main page */
 .mainpage {
+    gap: 1rem;
     background-color: #EDF1F5;
     width: 100%;
 
@@ -17,7 +18,7 @@ body {
 .toprowLeft {
     height: 50px;
     align-items: center;
-    background-color: rgb(222, 235, 245);
+    /* background-color: rgb(222, 235, 245); */
 }
 
 .toprowMiddle {
@@ -25,14 +26,14 @@ body {
     align-items: center;
     gap: 10px;
     height: 50px;
-    background-color: rgb(222, 235, 245);
+    /* background-color: rgb(222, 235, 245); */
 }
 
 .toprowRight {
     background-color: inherit;
     height: 50px;
     width: 100%;
-    background-color: rgb(222, 235, 245);
+    /* background-color: rgb(222, 235, 245); */
 
 }
 

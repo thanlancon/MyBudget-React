@@ -9,12 +9,10 @@ function EnvelopeList() {
     return (
         <div className='envelopelist'>
             <div className="envelopeListTitle">
-                <div></div>
-                <div>Balance Of Month</div>
-                <div>Total Balance</div>
-                <div></div>
+                <div >Balance Of Month</div>
+                <div >Total Balance</div>
             </div>
-            <div className='body'>
+            <div className='body envelopecontent'>
                 {categories.map(c => (
                     <CategoryEnvelopes category={c} key={c.value} />
                 ))}
