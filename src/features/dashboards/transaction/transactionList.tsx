@@ -74,8 +74,7 @@ function TransactionList() {
                         <th>Transfer Bank</th>
                         <th>Payee Name</th>
                         <th>Envelope Name</th>
-                        <th>Inflow</th>
-                        <th>Outflow</th>
+                        <th>Activity</th>
                         <th>Total Balance</th>
                     </tr>
                 </thead>
@@ -88,24 +87,25 @@ function TransactionList() {
                             <td>{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</td>
                             <td>{payees.find(x => x.value === b.payeeId)?.text}</td>
                             <td>{envelopes.find(x => x.value === b.envelopeId)?.text}</td>
-                            <td>{formatCurrencyNumber(b.inflow)}</td>
-                            <td>{formatCurrencyNumber(b.outflow)}</td>
+                            <td className={(b.inflow - b.outflow) < 0 ? 'negativecurrency' : 'possitivecurrency'}>{formatCurrencyNumber(b.inflow - b.outflow)}</td>
                             <td>{formatCurrencyNumber(b.totalBalance)}</td>
-
                         </tr>
                     ))}
                 </tbody>
-                <tfoot>
-                    <Pagination
-                        boundaryRange={1}
-                        defaultActivePage={pagination ? pagination.currentPage : 1}
-                        ellipsisItem={null}
-                        firstItem={null}
-                        lastItem={null}
-                        siblingRange={1}
-                        totalPages={pagination ? pagination.totalPages : 0}
-                        onPageChange={handlePageChanged}
-                    />
+                <tfoot >
+                    <div style={{ width: '100%' , display: 'flex', justifyContent: 'center' }}>
+                        <Pagination
+                            boundaryRange={1}
+                            defaultActivePage={pagination ? pagination.currentPage : 1}
+                            ellipsisItem={null}
+                            firstItem={null}
+                            lastItem={null}
+                            siblingRange={1}
+                            totalPages={pagination ? pagination.totalPages : 0}
+                            onPageChange={handlePageChanged}
+
+                        />
+                    </div>
                 </tfoot>
             </table>
         </>

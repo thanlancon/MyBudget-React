@@ -66,7 +66,7 @@ function BankAccountQuickView() {
                         <div className='text' >
                             <Link className='bankaccountname' to={`transactions/bank/${b.id}`}>{b.code}</Link>
                         </div>
-                        <div className='number'>
+                        <div className={`number ${b.totalBalance>0?'possitivecurrency':'negativecurrency'}`}>
                             {formatCurrencyNumber(b.totalBalance)}
                         </div>
                     </div>
