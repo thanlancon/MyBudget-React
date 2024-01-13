@@ -21,7 +21,7 @@ function TransactionDashBoard() {
     useEffect(()=>{
         transactionStore.loadData(1,globalStore.getDefaultItemPerPage);
     },[bankid]);
-    
+
     const handleGetNextPage=()=> {
         setLoadingNext(true);
         loadData(pagination!.currentPage + 1, globalStore.getDefaultItemPerPage).then(() => setLoadingNext(false));
@@ -34,7 +34,7 @@ function TransactionDashBoard() {
 
             </div>
             <div className='dashboardcontent' >
-                <InfiniteScroll
+                {/* <InfiniteScroll
                     pageStart={0}
                     loadMore={handleGetNextPage}
                     hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages}
@@ -43,7 +43,9 @@ function TransactionDashBoard() {
                     threshold={250}
                 >
                     <TransactionList />
-                </InfiniteScroll>
+                </InfiniteScroll> */}
+                <TransactionList/>
+                
             </div>
         </div>
     )

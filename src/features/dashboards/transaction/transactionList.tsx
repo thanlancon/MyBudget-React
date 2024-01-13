@@ -6,15 +6,16 @@ import { MouseEventHandler } from "react";
 import TransactionForm from "./transactionForm";
 import { NIL as NIL_UUID } from "uuid";
 import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
+import { Pagination, PaginationProps } from "semantic-ui-react";
 
 function TransactionList() {
 
-    const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore,globalStore } = useStore();
-    const { transactions, deleteItem } = transactionStore;
+    const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore, globalStore } = useStore();
+    const { transactions, deleteItem, pagination } = transactionStore;
     const { bankAccounts, payees, envelopes } = readOnlyListStore;
 
-    function loadTransactions() {
-        transactionStore.loadData(1, globalStore.getDefaultItemPerPage);
+    function loadTransactions(pageNumber: number = 1) {
+        transactionStore.loadData(pageNumber, globalStore.getDefaultItemPerPage);
     }
     function isFutureDate(date: Date | undefined | null) {
         if (!date) return true;
@@ -59,7 +60,9 @@ function TransactionList() {
         ];
         floatedMenuStore.openModal(x, y, menuItems);
     };
-
+    function handlePageChanged(event: React.MouseEvent, data: PaginationProps) {
+        loadTransactions(parseInt(data.activePage ? data.activePage?.toString() : '1'));
+    }
     return (
         <>
             <table className='middletable autowidth' >
@@ -92,6 +95,18 @@ function TransactionList() {
                         </tr>
                     ))}
                 </tbody>
+                <tfoot>
+                    <Pagination
+                        boundaryRange={1}
+                        defaultActivePage={pagination ? pagination.currentPage : 1}
+                        ellipsisItem={null}
+                        firstItem={null}
+                        lastItem={null}
+                        siblingRange={1}
+                        totalPages={pagination ? pagination.totalPages : 0}
+                        onPageChange={handlePageChanged}
+                    />
+                </tfoot>
             </table>
         </>
     )

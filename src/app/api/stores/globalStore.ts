@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx"
 //this store content things that are used for all store
 export class GlobalStore {
     private _budgetDate: Date | null = null;
-    private _defaultItemPerPage: number = 50;
+    private _defaultItemPerPage: number = 20;
     private _isShowMonthlyTransaction = false;
 
     constructor() {

@@ -91,6 +91,7 @@ export class TransactionStore {
 
                 if (response.isSuccess) {
                     transactions = <Transaction[]>response.data;
+                    this.clearTransactions();
                     transactions.forEach(transaction => {
                         this.addTransaction(transaction);
                     });
