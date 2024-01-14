@@ -18,17 +18,15 @@ import { EnvelopeBalance } from "../models/monthlyEnvelopeBalance";
 //handle request/response for Bank
 //////////////////////////////////
 
-const sleep = (delay: number) => {
-    return new Promise(resolve =>
-        setTimeout(resolve, delay))
-}
+
 const getCurrentHost =
+    // import.meta.env.MODE === "development"
+    //     ? "http://localhost:4000/api"
+    //     : "https://52.3.99.42:100/api";
     import.meta.env.MODE === "development"
         ? "http://localhost:4000/api"
-        : "https://52.3.99.42:100/api";
-//create default url
-// const baseUrl = 'https://52.3.99.42:100/api';
-// const baseUrl = 'http://localhost:4000/api';
+        : "https://khuongle.net:100/api";
+
 const baseUrl = getCurrentHost;
 axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(config => {
@@ -37,16 +35,7 @@ axios.interceptors.request.use(config => {
     return config;
 })
 
-axios.interceptors.response.use(async response => {
-    try {
-        await sleep(0);
-        return response;
-    } catch (error) {
-        console.log(error);
-        return Promise.reject(error);
-    }
 
-})
 
 //store CRUD request functions
 // const requests = {

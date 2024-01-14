@@ -43,29 +43,26 @@ function App() {
     <>
       <Modalform />
       <ModalMenu />
-      <div className='mainpage flexrow'>
-        <div className='flexcolumn maincolumnleft'>
-          <div className='toprowLeft'>
-            <DropDownMenu />
-          </div>
-          <div className='mainleft ' >
-            <BankAccountQuickView />
-          </div>
+      <div className='flexrow mainpagebackground maintopnav'>
+        <div className='left' >
+          <DropDownMenu />
         </div>
-        <div className='flexcolumn  maincolumnmiddle'>
-          <div className='toprowMiddle'>
-            <BudgetMonth />
-          </div>
-          <div className='mainmiddle'>
-            <Outlet />
-          </div>
+        <div className='middle flexrow' style={{ justifyContent: 'right', marginRight: '3rem' }}>
+          <BudgetMonth />
         </div>
-        <div className='flexcolumn  maincolumnright'>
-          <div className='toprowRight'></div>
-          <div className='mainright'>
-            {globalStore.isShowMonthlyTransaction
-              && <MonthlyWithEnvelope />}
-          </div>
+        <div className='right'></div>
+      </div>
+      <div className='divider'></div>
+      <div className='flexrow mainpagebackground'>
+        <div className='left leftcontent' >
+          <BankAccountQuickView />
+        </div>
+        <div className='middle flexrow middlecontent'>
+          <Outlet />
+        </div>
+        <div className='right flexrow rightcontent'>
+          {globalStore.isShowMonthlyTransaction
+            && <MonthlyWithEnvelope />}
         </div>
       </div >
     </>

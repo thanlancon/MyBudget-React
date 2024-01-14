@@ -6,12 +6,12 @@ function BankAccountList() {
     const { bankAccountStore } = useStore();
     const { bankAccounts, openForm, deleteItem } = bankAccountStore;
     return (
-        <table className='middletable'>
+        <table>
             <thead>
                 <tr>
                     <th>Tran. Date</th>
                     <th>Post. Date</th>
-                    
+
                     <th></th>
                 </tr>
             </thead>

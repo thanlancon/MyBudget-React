@@ -3,9 +3,32 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+
 }
 .flexrow{
     width: 100%;
     display: flex;
     flex-direction: row;
+
+}
+.flexrowtopcenter{
+    justify-content: center;
+    align-items: flex-start;
+}
+.flexcolumntopcenter{
+    justify-content:flex-start;
+    align-items:end;
+}
+.grid{
+    display:grid
+}
+.gridcellmiddleleft{
+    display: grid;
+    justify-items:left;
+    align-items:center
+}
+.gridcellmiddleright{
+    display: grid;
+    justify-items:right;
+    align-items:center
 }

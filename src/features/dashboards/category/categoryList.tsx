@@ -1,15 +1,19 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useEffect } from "react";
 import handleServerResponse from "../../../app/api/handleresponemessage";
 import CategoryForm from "./categoryForm";
-import {NIL as NIL_UUID} from "uuid";
+import { NIL as NIL_UUID } from "uuid";
 import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
+import { Pagination, PaginationProps } from "semantic-ui-react";
 
 function CategoryList() {
-    const { categoryStore ,floatedMenuStore,modalFormStore} = useStore();
-    const { categories, deleteItem } = categoryStore;
+    const { categoryStore, floatedMenuStore, modalFormStore, globalStore } = useStore();
+    const { categories, deleteItem, pagination } = categoryStore;
 
+    useEffect(()=>{
+        loadData();
+    },[]);
     async function handleDelete(id: string) {
         const confirmtext = prompt("Type 'yes' to confirm if you want to delete!!!", 'no');
         if (confirmtext?.toLowerCase() === 'yes') {
@@ -42,23 +46,42 @@ function CategoryList() {
         ];
         floatedMenuStore.openModal(x, y, menuItems);
     };
+    function loadData(pageNumber: number = 1) {
+        categoryStore.loadData(pageNumber, globalStore.getDefaultItemPerPage);
+    }
+    function handlePageChanged(event: React.MouseEvent, data: PaginationProps) {
+        loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
+    }
     return (
         <>
-            <table className='middletable'>
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     {categories.map(b => (
                         <tr key={b.id} onContextMenu={showMenu(b.id)}>
                             <td>{b.name}</td>
-
                         </tr>
                     ))}
                 </tbody>
+                <tfoot>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <Pagination
+                            boundaryRange={1}
+                            defaultActivePage={pagination ? pagination.currentPage : 1}
+                            ellipsisItem={null}
+                            firstItem={null}
+                            lastItem={null}
+                            siblingRange={1}
+                            totalPages={pagination ? pagination.totalPages : 0}
+                            onPageChange={handlePageChanged}
+
+                        />
+                    </div>
+                </tfoot>
             </table>
         </>
     )

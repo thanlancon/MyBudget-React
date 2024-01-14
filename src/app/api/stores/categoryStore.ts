@@ -51,6 +51,9 @@ export class CategoryStore {
         this.categories = [...array];
         this.categories = this.sortArray(this.categories);
     }
+    clearCategories = () => {
+        this.categories = [];
+    }
     loadData = async (pagenumber: number = -1, pagesize: number = -1) => {
         if (pagenumber !== -1 && pagesize !== -1) {
             this.setPagingParams(new PagingParams(pagenumber, pagesize));
@@ -60,6 +63,7 @@ export class CategoryStore {
         try {
             if (result.isSuccess) {
                 const resultData = result.data ? result.data : [];
+                this.clearCategories();
                 resultData.forEach(x => {
                     this.addItem(x);
                 });

@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { dateToString, formatCurrencyNumber } from "../../../../public/myfunctions";
-import '../../../app/layouts/css/monthlytransaction.css';
 
 function MonthlyWithEnvelope() {
     const { monthlyTransactionStore, readOnlyListStore } = useStore();
@@ -17,7 +16,7 @@ function MonthlyWithEnvelope() {
         return inputDate.getTime() > currentDate.getTime();
     }
     return (
-        <>
+        <div>
             {transactions.length > 0 &&
                 <table className='monthlyenvelope' >
                     <thead>
@@ -42,7 +41,7 @@ function MonthlyWithEnvelope() {
                     </tbody>
                 </table>
             }
-        </>
+        </div>
     )
 }
 export default observer(MonthlyWithEnvelope)

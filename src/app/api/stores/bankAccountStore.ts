@@ -50,6 +50,9 @@ export class BankAccountStore {
         this.bankAccounts = [...array];
         this.bankAccounts = this.sortArray(this.bankAccounts);
     }
+    clearBankAccounts = () => {
+        this.bankAccounts = [];
+    }
     loadData = async (pagenumber: number = -1, pagesize: number = -1) => {
         if (pagenumber !== -1 && pagesize !== -1) {
             this.setPagingParams(new PagingParams(pagenumber, pagesize));
@@ -60,6 +63,7 @@ export class BankAccountStore {
 
             if (result.isSuccess) {
                 const resultData = result.data ? result.data : [];
+                this.clearBankAccounts();
                 resultData.forEach(x => {
                     this.addItem(x);
                 });

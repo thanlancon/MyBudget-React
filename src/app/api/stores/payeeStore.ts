@@ -52,6 +52,9 @@ export class PayeeStore {
         this.payees = [...array];
         this.payees = this.sortArray(this.payees);
     }
+    clearPayees = () => {
+        this.payees = [];
+    }
     loadData = async (pagenumber: number = -1, pagesize: number = -1) => {
         if (pagenumber !== -1 && pagesize !== -1) {
             this.setPagingParams(new PagingParams(pagenumber, pagesize));
@@ -61,6 +64,7 @@ export class PayeeStore {
         try {
             if (result.isSuccess) {
                 const resultData = result.data ? result.data : [];
+                this.clearPayees();
                 resultData.forEach(x => {
                     this.addItem(x);
                 });

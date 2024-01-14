@@ -35,6 +35,9 @@ export class BankStore {
     addItem = (item: Bank) => {
         this.banks = [...this.banks.filter(x => x.id !== item.id), item];
     }
+    clearBanks = () => {
+        this.banks = [];
+    }
     loadData = async (pagenumber: number = -1, pagesize: number = -1) => {
         if (pagenumber !== -1 && pagesize !== -1) {
             this.setPagingParams(new PagingParams(pagenumber, pagesize));
@@ -44,6 +47,7 @@ export class BankStore {
         try {
             if (result.isSuccess) {
                 const resultData = result.data ? result.data : [];
+                this.clearBanks();
                 resultData.forEach(x => {
                     this.addItem(x);
                 });

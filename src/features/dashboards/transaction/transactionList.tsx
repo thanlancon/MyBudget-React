@@ -2,11 +2,11 @@ import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { dateToString, formatCurrencyNumber } from "../../../../public/myfunctions";
 import handleServerResponse from "../../../app/api/handleresponemessage";
-import { MouseEventHandler } from "react";
 import TransactionForm from "./transactionForm";
 import { NIL as NIL_UUID } from "uuid";
 import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
 import { Pagination, PaginationProps } from "semantic-ui-react";
+import { MouseEventHandler } from "react";
 
 function TransactionList() {
 
@@ -64,51 +64,47 @@ function TransactionList() {
         loadTransactions(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <>
-            <table className='middletable autowidth' >
-                <thead className='dashboardthead'>
-                    <tr>
-                        <th>Tran. Date</th>
-                        <th>Post. Date</th>
-                        <th>Bank</th>
-                        <th>Transfer Bank</th>
-                        <th>Payee Name</th>
-                        <th>Envelope Name</th>
-                        <th>Activity</th>
-                        <th>Total Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {transactions.map(b => (
-                        <tr key={b.id} onContextMenu={showMenu(b.id)} className={isFutureDate(b.transactionDate) ? 'futureTransaction' : 'currentTransaction'}>
-                            <td>{dateToString(b.transactionDate)}</td>
-                            <td>{dateToString(b.postDate)}</td>
-                            <td>{bankAccounts.find(x => x.value === b.bankId)?.text}</td>
-                            <td>{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</td>
-                            <td>{payees.find(x => x.value === b.payeeId)?.text}</td>
-                            <td>{envelopes.find(x => x.value === b.envelopeId)?.text}</td>
-                            <td className={(b.inflow - b.outflow) < 0 ? 'negativecurrency' : 'possitivecurrency'}>{formatCurrencyNumber(b.inflow - b.outflow)}</td>
-                            <td>{formatCurrencyNumber(b.totalBalance)}</td>
-                        </tr>
-                    ))}
-                </tbody>
-                <tfoot >
-                    <div style={{ width: '100%' , display: 'flex', justifyContent: 'center' }}>
-                        <Pagination
-                            boundaryRange={1}
-                            defaultActivePage={pagination ? pagination.currentPage : 1}
-                            ellipsisItem={null}
-                            firstItem={null}
-                            lastItem={null}
-                            siblingRange={1}
-                            totalPages={pagination ? pagination.totalPages : 0}
-                            onPageChange={handlePageChanged}
-
-                        />
+        <div className="flexcolumn fullwidth">
+            <div className="grid transactionheader">
+                <div>Tran. Date</div>
+                <div>Post. Date</div>
+                <div>Bank</div>
+                <div>Transfer Bank</div>
+                <div>Payee Name</div>
+                <div>Envelope Name</div>
+                <div style={{ textAlign: 'right' }}>Activity</div>
+                <div style={{ textAlign: 'right' }}>Total Balance</div>
+            </div>
+            <div className="flexcolumn">
+                {transactions.map((b, index) => (
+                    <div key={b.id} onContextMenu={showMenu(b.id)} className={`grid transactionrow ${(index % 2 ===0?'evenrowcolor':'oddrowcolor') } ${isFutureDate(b.transactionDate) ? 'futureTransaction' : 'currentTransaction'}`}>
+                        <div style={{ paddingLeft: '1rem' }} className="gridcellmiddleleft transactioncell" >{dateToString(b.transactionDate)}</div>
+                        <div className="gridcellmiddleleft transactioncell">{dateToString(b.postDate)}</div>
+                        <div className="gridcellmiddleleft transactioncell">{bankAccounts.find(x => x.value === b.bankId)?.text}</div>
+                        <div className="gridcellmiddleleft transactioncell">{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</div>
+                        <div className="gridcellmiddleleft transactioncell">{payees.find(x => x.value === b.payeeId)?.text}</div>
+                        <div className="gridcellmiddleleft transactioncell">{envelopes.find(x => x.value === b.envelopeId)?.text}</div>
+                        <div className={`cellnumber gridcellmiddleright transactioncell ${(b.inflow - b.outflow) < 0 ? 'negativecurrency' : 'possitivecurrency'}`}>{formatCurrencyNumber(b.inflow - b.outflow)}</div>
+                        <div className='cellnumber gridcellmiddleright transactioncell'>{formatCurrencyNumber(b.totalBalance)}</div>
                     </div>
-                </tfoot>
-            </table>
-        </>
+                ))}
+            </div>
+            <div >
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <Pagination
+                        boundaryRange={1}
+                        defaultActivePage={pagination ? pagination.currentPage : 1}
+                        ellipsisItem={null}
+                        firstItem={null}
+                        lastItem={null}
+                        siblingRange={1}
+                        totalPages={pagination ? pagination.totalPages : 0}
+                        onPageChange={handlePageChanged}
+
+                    />
+                </div>
+            </div>
+        </div>
     )
 }
 export default observer(TransactionList)

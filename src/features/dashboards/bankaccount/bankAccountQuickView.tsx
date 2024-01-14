@@ -5,7 +5,7 @@ import { formatCurrencyNumber } from "../../../../public/myfunctions";
 import handleServerResponse from "../../../app/api/handleresponemessage";
 import BankAccountForm from "./bankAccountForm";
 import { MouseEventHandler, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { MenuItem } from "../../../app/api/stores/floatedMenuStore";
 
 function BankAccountQuickView() {
@@ -64,7 +64,7 @@ function BankAccountQuickView() {
                 {bankAccounts.map(b => (
                     <div className='row' key={b.id} onContextMenu={showMenu(b.id)}>
                         <div className='text' >
-                            <Link className='bankaccountname' to={`transactions/bank/${b.id}`}>{b.code}</Link>
+                            <NavLink className='bankaccountname' to={`transactions/bank/${b.id}`}>{b.code}</NavLink>
                         </div>
                         <div className={`number ${b.totalBalance>0?'possitivecurrency':'negativecurrency'}`}>
                             {formatCurrencyNumber(b.totalBalance)}

@@ -1,16 +1,20 @@
 import { useStore } from '../../../app/api/stores/stores';
 import { observer } from 'mobx-react-lite';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import handleServerResponse from '../../../app/api/handleresponemessage';
 import BankForm from './bankform';
 import { NIL as NIL_UUID } from 'uuid';
 import { MenuItem } from '../../../app/api/stores/floatedMenuStore';
+import { Pagination, PaginationProps } from 'semantic-ui-react';
 
 function BankList() {
-    const { bankStore, floatedMenuStore, modalFormStore } = useStore();
-    const { banks } = bankStore;
+    const { bankStore, floatedMenuStore, modalFormStore,globalStore } = useStore();
+    const { banks,pagination } = bankStore;
     if (!banks) return (<></>);
 
+    useEffect(()=>{
+        loadData();
+    },[]);
     async function handleDelete(id: string) {
         const confirmtext = prompt("Type 'yes' to confirm if you want to delete!!!", 'no');
         if (confirmtext?.toLowerCase() === 'yes') {
@@ -43,6 +47,12 @@ function BankList() {
         ];
         floatedMenuStore.openModal(x, y, menuItems);
     };
+    function loadData(pageNumber: number = 1) {
+        bankStore.loadData(pageNumber, globalStore.getDefaultItemPerPage);
+    }
+    function handlePageChanged(event: React.MouseEvent, data: PaginationProps) {
+        loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
+    }
     return (
         <table className='middletable'>
             <thead>
@@ -59,6 +69,21 @@ function BankList() {
                     </tr>
                 ))}
             </tbody>
+            <tfoot>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <Pagination
+                        boundaryRange={1}
+                        defaultActivePage={pagination ? pagination.currentPage : 1}
+                        ellipsisItem={null}
+                        firstItem={null}
+                        lastItem={null}
+                        siblingRange={1}
+                        totalPages={pagination ? pagination.totalPages : 0}
+                        onPageChange={handlePageChanged}
+
+                    />
+                </div>
+            </tfoot>
         </table>
     )
 }
