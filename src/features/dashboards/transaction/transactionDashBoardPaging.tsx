@@ -18,7 +18,7 @@ function TransactionDashBoard() {
         transactionStore.loadData(pageNumber, globalStore.getDefaultItemPerPage);
     }
     return (
-        <div className="flexcolumn fullwidth flexcolumntopcenter">
+        <div className="flexhorizontal fullwidth flexhorizontaltopcenter">
             <TransactionList />
         </div>
     )

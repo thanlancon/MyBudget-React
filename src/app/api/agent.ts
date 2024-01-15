@@ -25,7 +25,7 @@ const getCurrentHost =
     //     : "https://52.3.99.42:100/api";
     import.meta.env.MODE === "development"
         ? "http://localhost:4000/api"
-        : "https://khuongle.net:100/api";
+        : "http://www.khuongle.net:100/api";
 
 const baseUrl = getCurrentHost;
 axios.defaults.baseURL = baseUrl;

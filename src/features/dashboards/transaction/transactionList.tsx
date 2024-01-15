@@ -64,7 +64,7 @@ function TransactionList() {
         loadTransactions(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <div className="flexcolumn fullwidth">
+        <div className="flexvertial fullwidth">
             <div className="grid transactionheader">
                 <div>Tran. Date</div>
                 <div>Post. Date</div>
@@ -75,7 +75,7 @@ function TransactionList() {
                 <div style={{ textAlign: 'right' }}>Activity</div>
                 <div style={{ textAlign: 'right' }}>Total Balance</div>
             </div>
-            <div className="flexcolumn">
+            <div className="flexvertial">
                 {transactions.map((b, index) => (
                     <div key={b.id} onContextMenu={showMenu(b.id)} className={`grid transactionrow ${(index % 2 ===0?'evenrowcolor':'oddrowcolor') } ${isFutureDate(b.transactionDate) ? 'futureTransaction' : 'currentTransaction'}`}>
                         <div style={{ paddingLeft: '1rem' }} className="gridcellmiddleleft transactioncell" >{dateToString(b.transactionDate)}</div>

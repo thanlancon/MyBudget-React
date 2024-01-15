@@ -42,6 +42,7 @@ function CategoryEnvelopes({ category }: Props) {
         modalFormStore.openModal(<EnvelopeForm />, 'envelopemodal');
     }
     const showEnvelopeMenu = (id: string, itemInfor: string = ''): MouseEventHandler<HTMLDivElement> => (event) => {
+        return;
         event.preventDefault();
         const createMenu = () => {
             handleOpenEnvelopeForm();
@@ -125,6 +126,7 @@ function CategoryEnvelopes({ category }: Props) {
         return balance;
     }
     function handleEnvelopeNameClick(envelopeID: string) {
+        return;
         const month = globalStore.getBudgetMonth;
         const year = globalStore.getBudgetYear;
         monthlyTransactionStore.clearTransactions();
@@ -136,27 +138,37 @@ function CategoryEnvelopes({ category }: Props) {
             <div className='categoryrow' key={category.value} onContextMenu={showCategoryMenu(category.value, category.text)}
                 onClick={clickCategory}
             >{category.text}</div>
-            {showEnvelopes &&
-                envelopes.map(b => (
-                    b.categoryId === category.value &&
-                    <div className='enveloperow' key={b.id}
-                        onContextMenu={showEnvelopeMenu(b.id, b.name)}
-                        onClick={() => handleEnvelopeNameClick(b.id)}
-                    >
-                        <div className='name' style={{marginLeft:'3rem'}}>{b.name}</div>
-                        <div className='number' style={{textAlign:'right'}}>
-                            {formatCurrencyNumber(FindMonthlyBalance(b.id))}
-                        </div>
-                        <div className={`number ${b.totalBalance > 0 ? 'possitivecurrency' : b.totalBalance < 0 ? 'negativecurrency' : ''}`}
-                            style={{textAlign:'right',marginRight:'1rem'}}
-                            onClick={() => handleFundTransfer(b.id)}
-                        >
-                            {formatCurrencyNumber(b.totalBalance)}
-                        </div>
+            <div className='enveloperow'
+            key={`${category.value}-${category.value}`}
+            >
+                {showEnvelopes &&
+                    envelopes.map((b,index) => (
+                        b.categoryId === category.value &&
+                        // <div className='enveloperow' key={b.id}
+                        //     onContextMenu={showEnvelopeMenu(b.id, b.name)}
+                        //     onClick={() => handleEnvelopeNameClick(b.id)}
+                        // >
+                        <>
+                            <div className='name'
+                                onContextMenu={showEnvelopeMenu(b.id, b.name)}
+                                onClick={() => handleEnvelopeNameClick(b.id)}
+                            >{b.name}</div>
+                            <div className='number'
+                            >
+                                {formatCurrencyNumber(FindMonthlyBalance(b.id))}
+                            </div>
+                            <div
+                                className={`number ${b.totalBalance > 0 ? 'possitivecurrency' : b.totalBalance < 0 ? 'negativecurrency' : ''}`}
+                                onClick={() => handleFundTransfer(b.id)}
+                            >
+                                {formatCurrencyNumber(b.totalBalance)}
+                            </div>
+                        </>
+                        // </div >
 
-                    </div >
-                ))
-            }
+                    ))
+                }
+            </div >
         </>
     )
 }

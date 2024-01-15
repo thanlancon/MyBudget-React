@@ -1,23 +1,27 @@
 
-.flexcolumn{
+.flexvertical{
     width: 100%;
     display: flex;
     flex-direction: column;
 
 }
-.flexrow{
+.flexhorizontal{
     width: 100%;
     display: flex;
     flex-direction: row;
 
 }
-.flexrowtopcenter{
+.flexhorizontaltopcenter{
     justify-content: center;
     align-items: flex-start;
 }
-.flexcolumntopcenter{
+.flexverticaltopcenter{
     justify-content:flex-start;
     align-items:end;
+}
+.flexallmiddle{
+    justify-content: center;
+    align-items: center;
 }
 .grid{
     display:grid
@@ -31,4 +35,10 @@
     display: grid;
     justify-items:right;
     align-items:center
+}
+.textleft{
+    text-align: left;
+}
+.righttext{
+    text-align: right;
 }
