@@ -14,7 +14,7 @@ function TransactionList() {
 
     const { transactionStore, readOnlyListStore, modalFormStore, floatedMenuStore, globalStore } = useStore();
     const { transactions, deleteItem, pagination } = transactionStore;
-    const { bankAccounts, payees, envelopes } = readOnlyListStore;
+    const { bankAccounts, payees } = readOnlyListStore;
     const navigate = useNavigate();
     function loadTransactions(pageNumber: number = 1) {
         transactionStore.loadData(pageNumber, globalStore.getDefaultItemPerPage);

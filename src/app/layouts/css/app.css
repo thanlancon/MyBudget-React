@@ -629,10 +629,6 @@ div.enveloperow>.number {
     padding-right: 5px;
 }
 
-.transactiontable>* {
-    /* text-wrap: wrap; */
-}
-
 .transactionheader {
     height: 3rem;
     background-color: burlywood;

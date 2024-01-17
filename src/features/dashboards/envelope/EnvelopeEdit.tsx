@@ -11,7 +11,7 @@ function EnvelopeEdit() {
     const navigate=useNavigate();
 
     const { envelopeStore } = useStore();
-    const { setSelectedItem, selectedItem, createItem, updateItem } = envelopeStore;
+    const { setSelectedItem, selectedItem } = envelopeStore;
 
     const [showForm, setShowForm] = useState(true);
     const [showTransfer, setShowTransfer] = useState(false);
