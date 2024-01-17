@@ -13,7 +13,6 @@ function EnvelopeList() {
                 <div style={{ marginRight: '1rem' }}>Total Balance</div>
             </div>
             <div className='envelopelist'>
-
                 <div className='envelopecontent'>
                     {categories.map(c => (
                         <CategoryEnvelopes category={c} key={c.value} />

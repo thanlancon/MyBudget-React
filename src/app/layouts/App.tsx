@@ -38,14 +38,14 @@ function App() {
     }
   }, [location.pathname]);
   return (
-    <>
+    <div className='mainbody'>
       <Modalform />
       <ModalMenu />
       <div className='flexhorizontal mainpagebackground maintopnav'>
-        <div className='left' >
+        <div  >
           <DropDownMenu />
         </div>
-        <div className='middle flexhorizontal flexallmiddle' >
+        <div className='flexhorizontal flexallmiddle' >
           <BudgetMonth />
         </div>
       </div>
@@ -57,7 +57,7 @@ function App() {
         </div>
 
       </div >
-    </>
+    </div>
   )
 }
 

@@ -11,7 +11,7 @@ function EnvelopeForm() {
     const { selectedItem
         , createItem, updateItem } = envelopeStore;
 
-    const { categories,envelopes } = readOnlyListStore;
+    const { categories, envelopes } = readOnlyListStore;
 
     var initialItem = {
         id: '',
@@ -25,7 +25,6 @@ function EnvelopeForm() {
     const [statedItem, setStatedItem] = useState(selectedItem ? selectedItem : initialItem);
     async function handleSubmit() {
         try {
-
             if (statedItem.id) {
                 const response = await updateItem(statedItem);
                 handleServerResponse(response);
@@ -48,7 +47,22 @@ function EnvelopeForm() {
     function handleSelectedChange(event: React.SyntheticEvent<HTMLElement, Event>, data: DropdownProps) {
         const { name, value } = data;
         event;
-        setStatedItem({ ...statedItem, [name]:  value ? value : NIL_UUID });
+        setStatedItem({ ...statedItem, [name]: value ? value : NIL_UUID });
+    }
+    async function clickDelete() {
+        if (!selectedItem) {
+            return;
+        }
+        const confirmtext = prompt(`Type 'yes' to confirm if you want to delete envelope ${selectedItem.name} !!!`, 'no');
+        if (confirmtext?.toLowerCase() === 'yes') {
+            const response = await envelopeStore.deleteItem(selectedItem.id);
+            if (response.isSuccess) {
+                handleServerResponse(response);
+            }
+            else {
+                handleError(response.error);
+            }
+        }
     }
     return (
         <div className='envelopeform'>
@@ -83,8 +97,10 @@ function EnvelopeForm() {
                             onChange={handleChange} />
                     </div>
                 </fieldset>
-                <div className='oneButton'>
-                    <button className='save' type='button' onClick={handleSubmit}>Save</button>
+                <div className='flexhorizontal'>
+                    <button className='deletebutton buttonsm' type='button' onClick={clickDelete}>Delete</button>
+                    <div className="fullwidth"></div>
+                    <button className='savebutton buttonsm' type='button' onClick={handleSubmit}>Save</button>
                 </div>
             </form>
         </div >

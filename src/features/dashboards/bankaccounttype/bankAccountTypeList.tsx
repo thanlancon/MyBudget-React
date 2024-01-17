@@ -9,9 +9,9 @@ function BankAccountTypeList() {
     const { bankAccountTypeStore, floatedMenuStore, globalStore } = useStore();
     const { bankAccountTypes, openForm, deleteItem, pagination } = bankAccountTypeStore;
 
-    useEffect(()=>{
+    useEffect(() => {
         loadData();
-    },[]);
+    }, []);
     async function handleDelete(id: string) {
         const confirmtext = prompt("Type 'yes' to confirm if you want to delete!!!", 'no');
         if (confirmtext?.toLowerCase() === 'yes') {
@@ -47,40 +47,33 @@ function BankAccountTypeList() {
         loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Code</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {bankAccountTypes.map(b => (
-                        <tr key={b.id} onContextMenu={showMenu(b.id)}>
-                            <td>{b.code}</td>
-                            <td>{b.name}</td>
+        <div className="flexvertical fullwidth">
+            <div className="grid gridcol2 table">
+                <div className="tabletitle titletext">Name</div>
+                <div className="tabletitle titletext">Balance</div>
+                {bankAccountTypes.map((item, index) => (
+                    <>
+                        <div className="hover">{item.code}</div>
+                        <div className="flexhorizontal flexmiddleright">
+                            {item.name}
+                        </div>
+                    </>
+                ))}
+            </div>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Pagination
+                    boundaryRange={1}
+                    defaultActivePage={pagination ? pagination.currentPage : 1}
+                    ellipsisItem={null}
+                    firstItem={null}
+                    lastItem={null}
+                    siblingRange={1}
+                    totalPages={pagination ? pagination.totalPages : 0}
+                    onPageChange={handlePageChanged}
 
-                        </tr>
-                    ))}
-                </tbody>
-                <tfoot>
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                        <Pagination
-                            boundaryRange={1}
-                            defaultActivePage={pagination ? pagination.currentPage : 1}
-                            ellipsisItem={null}
-                            firstItem={null}
-                            lastItem={null}
-                            siblingRange={1}
-                            totalPages={pagination ? pagination.totalPages : 0}
-                            onPageChange={handlePageChanged}
-
-                        />
-                    </div>
-                </tfoot>
-            </table>
-        </>
+                />
+            </div>
+        </div>
     )
 }
 export default observer(BankAccountTypeList)

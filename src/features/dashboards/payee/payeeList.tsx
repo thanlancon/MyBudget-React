@@ -53,36 +53,27 @@ function PayeeList() {
         loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                {payees.map(b => (
-                    <tr key={b.id} onContextMenu={showMenu(b.id)}>
-                        <td>{b.name}</td>
+        <div className="flexvertial fullwidth">
+        <div className="grid gridcol1 table">
+            <div className="tabletitle titletext">Name</div>
+            {payees.map((item, index) => (
+                <div className="hover">{item.name}</div>
+            ))}
+        </div>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Pagination
+                boundaryRange={1}
+                defaultActivePage={pagination ? pagination.currentPage : 1}
+                ellipsisItem={null}
+                firstItem={null}
+                lastItem={null}
+                siblingRange={1}
+                totalPages={pagination ? pagination.totalPages : 0}
+                onPageChange={handlePageChanged}
 
-                    </tr>
-                ))}
-            </tbody>
-            <tfoot>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <Pagination
-                        boundaryRange={1}
-                        defaultActivePage={pagination ? pagination.currentPage : 1}
-                        ellipsisItem={null}
-                        firstItem={null}
-                        lastItem={null}
-                        siblingRange={1}
-                        totalPages={pagination ? pagination.totalPages : 0}
-                        onPageChange={handlePageChanged}
-
-                    />
-                </div>
-            </tfoot>
-        </table>
+            />
+        </div>
+    </div>
     )
 }
 export default observer(PayeeList)

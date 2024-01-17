@@ -9,6 +9,9 @@ import BankAccountTypeDashBoard from "../../../features/dashboards/bankaccountty
 import CategoryDashBoard from "../../../features/dashboards/category/categoryDashBoard";
 import PayeeDashBoard from "../../../features/dashboards/payee/payeeDashBoard";
 import { RouterURL } from "./routerURL";
+import EnvelopeEdit from "../../../features/dashboards/envelope/EnvelopeEdit";
+import BankAccount from "../../../features/dashboards/bankaccount/BankAccount";
+import Transaction from "../../../features/dashboards/transaction/Transaction";
 
 const router = createHashRouter([
   {
@@ -38,6 +41,18 @@ const router = createHashRouter([
         {
             path:RouterURL.pathTransactions,
             element:<TransactionDashBoardPaging/>
+        },
+        {
+            path:RouterURL.pathEndvelopeEdit,
+            element:<EnvelopeEdit/>
+        },
+        {
+            path:RouterURL.pathBankAccounts,
+            element:<BankAccount/>
+        },
+        {
+            path:RouterURL.pathTransactionDetail,
+            element:<Transaction/>
         }
     ]
   },

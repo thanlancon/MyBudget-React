@@ -50,31 +50,22 @@ function EnvelopeTransferFund() {
         }
     }
     return (
-        <div className='envelopeTransfer'>
-            <form className='defaultform'>
-                <fieldset>
-                    <div className='formrowgroup'>
-                        <label className='enveTransferLabel'>Current Balance</label>
-                        <input className='enveTransferInput' disabled name='totalbalance'
-                            value={formatCurrencyNumber(selectedItem?.totalBalance)} />
-                    </div>
-                    <div className='formrowgroup'>
-                        <label className='enveTransferLabel' htmlFor='balanceTransfer'>Transfer Amount</label>
-                        <input className='enveTransferInput' name='balanceTransfer'
-                            value={statedItem.balanceTransfer}
-                            onChange={handleChange} />
-                    </div>
-                    <div className='formrowgroup'>
-                        <label className='enveTransferLabel' htmlFor='envelopeID_To'>To Envelope</label>
-                        <Select name='envelopeID_To' options={envelopes} onChange={handleSelectChange}></Select>
-                    </div>
-
-                </fieldset>
-                <div className='oneButton'>
-                    <button className='save' type='button' onClick={handleSubmit}>Save</button>
-                </div>
-            </form>
-        </div>
+        <form className='defaultform'>
+            <fieldset>
+                    <label>Current Balance</label>
+                    <input disabled name='totalbalance'
+                        value={formatCurrencyNumber(selectedItem?.totalBalance)} />
+                    <label htmlFor='balanceTransfer'>Transfer Amount</label>
+                    <input  name='balanceTransfer'
+                        value={statedItem.balanceTransfer}
+                        onChange={handleChange} />
+                    <label  htmlFor='envelopeID_To'>To Envelope</label>
+                    <Select name='envelopeID_To' options={envelopes} onChange={handleSelectChange}></Select>
+            </fieldset>
+            <div className='oneButton'>
+                <button className='save' type='button' onClick={handleSubmit}>Save</button>
+            </div>
+        </form>
     )
 }
 export default observer(EnvelopeTransferFund)

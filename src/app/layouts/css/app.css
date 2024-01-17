@@ -1,5 +1,33 @@
+:root {
+    --button-color: rgba(46, 230, 9, 0.437);
+    --body-background-color: rgba(27, 26, 26, 0.893);
+    --screen-small:400px;
+    --screen-medium:800px;
+    --screen-large:2000px;
+}
+
 body {
     height: 100% !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--body-background-color) !important;
+}
+
+.mainbody {
+    min-width: 100%;
+}
+
+@media (min-width:1000px) {
+    .mainbody {
+        width: 800px;
+    }
+}
+
+@media (max-width:800px) {
+    .mainbody {
+        width: 100%;
+    }
 }
 
 .ui.item.dropdown {
@@ -14,6 +42,7 @@ body {
 .divider {
     height: 1rem;
     width: 100%;
+    background-color: white;
 }
 
 .left {
@@ -31,6 +60,18 @@ body {
 .maintopnav {
     align-items: center;
     height: 4rem;
+}
+
+.maintopnav:first-child {
+    flex: 1 1 0;
+}
+
+.ui.vertical.menu {
+    width: 6em !important;
+}
+
+.maintopnav div+div {
+    flex: 5 1 0;
 }
 
 .leftcontent {
@@ -86,21 +127,21 @@ form[class='default'] input {
     height: 30px;
 }
 
-button[class='save'] {
-    height: 30px;
-    width: 80px;
-    margin: 0 1em 1em 1em;
+.savebutton {
     background-color: rgba(190, 19, 238, 0.954);
     font-weight: bolder;
     color: rgb(9, 255, 0);
     cursor: pointer;
 }
 
-button[class='close'] {
-    height: 30px;
-    width: 80px;
-    margin: 0 1em 1em 1em;
+.closebutton {
     background-color: beige;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.deletebutton {
+    background-color: rgb(234, 57, 134);
     font-weight: bold;
     cursor: pointer;
 }
@@ -121,7 +162,7 @@ button[class='close'] {
     height: 50px;
 }
 
-button[class='plus'] {
+.buttonplus {
     width: 25px;
     height: 25px;
     margin: 0 .5em;
@@ -166,7 +207,7 @@ label {
 }
 
 .negativecurrency {
-    color: rgb(138, 6, 240);
+    color: rgb(240, 6, 100);
 }
 
 .possitivecurrency {
@@ -177,7 +218,6 @@ label {
     display: flex;
     align-items: center;
     width: 100%;
-
 }
 
 .topmenu div:nth-child(2) {
@@ -335,44 +375,11 @@ label {
     text-align: right;
 }
 
-table {
-    display: block;
-    width: 100%;
-
-}
-
-tbody {
-    white-space: normal;
-}
-
-thead[class='dashboardthead'] {
-    background-color: blanchedalmond;
-    position: sticky;
-    top: 0;
-}
-
-table,
-th,
-td {
-    border: solid 1px black;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-}
 
 .dashboard {
     width: 100%;
 }
 
-tr:hover {
-    background-color: aquamarine !important;
-}
 
 .dashboardtitle {
     grid-area: 'title';
@@ -461,18 +468,16 @@ tr:hover {
     align-items: center;
     height: 2em;
 }
-.enveloperow>.name{
+
+.enveloperow>.name {
     justify-content: left;
     text-indent: 2em;
 }
-div.enveloperow>.number{
+
+div.enveloperow>.number {
     justify-content: right;
 }
 
-.enveloperow :hover {
-    background-color: aquamarine !important;
-    cursor: pointer;
-}
 
 .hiddenbutton {
     cursor: pointer;
@@ -521,11 +526,11 @@ div.enveloperow>.number{
 }
 
 .envelopemodal {
-    width: 450px !important;
+    max-width: 450px !important;
 }
 
 .envelopeFundTransferModal {
-    width: 450px !important;
+    max-width: 450px !important;
 }
 
 .enveTransferLabel {
@@ -537,9 +542,9 @@ div.enveloperow>.number{
     text-align: right;
 }
 
-.menu {
+/* .menu {
     width: 100% !important;
-}
+} */
 
 .monthlyenvelope {
     font-size: 8pt;
@@ -572,68 +577,63 @@ div.enveloperow>.number{
     height: 50px;
 }
 
-.transactionform {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    width: 700px;
-    display: flex;
+/* style for transaction */
+@media (min-width:400px){
+    .transactionform{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 1em;
+        width:max-content;
+    }
 }
-
-.transactionform label {
-    width: 120px !important;
-    margin-left: 1em;
+@media (max-width:400px){
+    .transactionform{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 1em;
+        width:100%;
+    }
 }
-
-.tranInput {
-    width: 200px;
-    height: 30px !important;
+.transactionform{
+    display: grid;
+    gap: 1em;
 }
-
-.tranTextArea {
-    width: 530px;
-    height: 80px;
-}
-
-.tranDivLabel {
-    width: 133px;
-    display: flex;
-    align-items: center;
-}
-
 .transactionmodal {
     width: 750px !important;
 }
-
-.tranTextArea {
-    width: 510px;
-}
-
-/* style for transaction */
 .futureTransaction {
     color: rgb(146, 166, 186);
 }
 
 .transactionrow {
-    grid-template-columns: 2fr 2fr 3fr 2fr 6fr 3fr 2fr 2fr;
+
     height: 3rem;
     column-gap: 3px;
 
 }
-.oddrowcolor{
+.hover:hover{
+    cursor: pointer;
+    background-color: rgb(219, 228, 237);
+}
+.oddrowcolor {
     background-color: rgba(249, 245, 245, 0.678);
 }
-.evenrowcolor{
+
+.evenrowcolor {
     background-color: rgba(50, 237, 244, 0.678);
 }
+
 .transactionrow>* {
     min-width: 100%;
     padding-left: 5px;
     padding-right: 5px;
 }
 
+.transactiontable>* {
+    /* text-wrap: wrap; */
+}
+
 .transactionheader {
-    grid-template-columns: 2fr 2fr 3fr 2fr 6fr 3fr 2fr 2fr;
     height: 3rem;
     background-color: burlywood;
     align-items: center;
@@ -648,3 +648,39 @@ div.enveloperow>.number{
 }
 
 /* end of style for transaction */
+button {
+    background-color: var(--button-color);
+}
+
+.currency {
+    text-align: right;
+}
+
+.tabletitle {
+    height: 3em;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    background-color: rgb(9, 255, 0);
+}
+
+.titletext {
+    justify-content: center;
+}
+
+.table {
+    border: 1px solid;
+}
+
+.table>* {
+    border: 1px solid;
+    padding: .25em;
+}
+
+.tablecellsm {
+    padding: .5em;
+}
+
+.hover:hover {
+    cursor: pointer;
+}

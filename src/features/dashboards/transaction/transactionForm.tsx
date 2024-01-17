@@ -72,39 +72,37 @@ function TransactionForm() {
         setOpenPayeeForm(true);
     }
     return (
-        <div className='transactionform'>
-            <form className='defaultform' >
-                <fieldset>
-                    <div className='formrowgroup'>
-                        <div className='datepicker'>
-                            <label>Transaction Date</label>
-                            <div className="tranInput">
-                                <DatePicker
-                                    selected={transactionDate}
-                                    onChange={(date) => setTransactionDate(date)}
-                                />
-                            </div>
-                        </div>
-                        <div className='datepicker '>
-                            <label >Post Date</label>
-                            <div className="tranInput">
-                                <DatePicker
-                                    selected={postDate}
-                                    onChange={(date) => setPostDate(date)}
-                                />
-                            </div>
+        <form className='defaultform' >
+            <fieldset>
+                <div className="transactionform">
+                    <div className='flexvertical'>
+                        <label>Transaction Date</label>
+                        <div className="tranInput">
+                            <DatePicker
+                                selected={transactionDate}
+                                onChange={(date) => setTransactionDate(date)}
+                            />
                         </div>
                     </div>
-                    <div className='formrowgroup'>
-                        <label htmlFor='inflow'>Inflow</label>
+                    <div className='flexvertical'>
+                        <label >Post Date</label>
                         <div className="tranInput">
-                            <input name='inflow'
-                                type='text'
-                                placeholder='Inflow'
-                                className='currencyinput'
-                                value={statedItem.inflow}
-                                onChange={handleInputChange} />
+                            <DatePicker
+                                selected={postDate}
+                                onChange={(date) => setPostDate(date)}
+                            />
                         </div>
+                    </div>
+                    <div className='flexvertical fullwidth'>
+                        <label htmlFor='inflow'>Inflow</label>
+                        <input name='inflow'
+                            type='text'
+                            placeholder='Inflow'
+                            className='currencyinput'
+                            value={statedItem.inflow}
+                            onChange={handleInputChange} />
+                    </div>
+                    <div className='flexvertical'>
                         <label htmlFor='outflow'>Outflow</label>
                         <div className="tranInput">
                             <input name='outflow' placeholder='Outflow'
@@ -113,60 +111,64 @@ function TransactionForm() {
                                 onChange={handleInputChange} />
                         </div>
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexvertical'>
                         <label htmlFor='envelopeId'>Envelope</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='envelopeId' placeholder="Select Envelope" defaultValue={statedItem.envelopeId} options={envelopes} onChange={handleSelect}></Form.Select>
                         </div>
-                        <div className='tranDivLabel'>
-                            <label htmlFor='payeeId'>Payee</label>
-                            <button className='plus' type='button' onClick={() => handleAddPayee()}>+</button>
-                        </div>
+                    </div>
+
+                    <div className='flexvertical'>
+                        <label htmlFor='payeeId'>Payee</label>
+                        <button className='buttonplus' type='button' onClick={() => handleAddPayee()}>+</button>
+
                         <div className="tranInput">
                             <Form.Select search clearable name='payeeId' placeholder="Select Payee" defaultValue={statedItem.payeeId} options={payees} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexvertical'>
                         <label htmlFor='bankId'>Bank</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='bankId' placeholder="Select bank" defaultValue={statedItem.bankId} options={bankAccounts} onChange={handleSelect}></Form.Select>
                         </div>
+                    </div>
+                    <div className='flexvertical'>
                         <label htmlFor='bankId_Transfer'>Bank Transfer</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='bankId_Transfer' placeholder="Select bank transfer" defaultValue={statedItem.bankId_Transfer} options={bankAccounts} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexvertical'>
                         <label htmlFor='outflow'>Note</label>
                         <textarea className='tranTextArea' name='note' placeholder='Note'
                             value={statedItem.note ? statedItem.note : ''}
                             onChange={handleInputChange} />
 
                     </div>
-                </fieldset>
-                <div>
-                    <div className='twoButton'>
-                        <button className='save' type='button' onClick={handleSubmit} >Save</button>
-                    </div>
-                    <div>
-                        <Modal className='payeeFormModal'
-                            open={openPayeeForm}
-                            onOpen={() => setOpenPayeeForm(true)}
-                        >
-                            <ModalContent>
-                                <PayeeForm reloadList={false} />
-                            </ModalContent>
-                            <Modal.Actions>
-                                <Button color='green' inverted onClick={handleClosePayeeForm}>
-                                    <Icon name='checkmark' /> Close
-                                </Button>
-                            </Modal.Actions>
-                        </Modal>
-                    </div>
                 </div>
-            </form>
+            </fieldset>
+            <div>
+                <div className='flexvertical'>
+                    <div className="fullwidth"></div>
+                    <button className='savebutton buttonsm' type='button' onClick={handleSubmit}>Save</button>
+                </div>
 
-        </div>
+                <Modal className='payeeFormModal'
+                    open={openPayeeForm}
+                    onOpen={() => setOpenPayeeForm(true)}
+                >
+                    <ModalContent>
+                        <PayeeForm reloadList={false} />
+                    </ModalContent>
+                    <Modal.Actions>
+                        <Button color='green' inverted onClick={handleClosePayeeForm}>
+                            <Icon name='checkmark' /> Close
+                        </Button>
+                    </Modal.Actions>
+                </Modal>
+
+            </div>
+        </form>
     )
 }
 
