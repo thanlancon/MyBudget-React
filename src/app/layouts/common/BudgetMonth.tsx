@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import { useStore } from "../../api/stores/stores";
 
 function BudgetMonth() {
-    const { globalStore, monthlyTransactionStore } = useStore();
+    const { globalStore } = useStore();
     const [selectedDate, setSelelectedDate] = useState(globalStore.budgetDate);
 
     useEffect(() => {
@@ -14,10 +14,9 @@ function BudgetMonth() {
     function handleDateChange(date: Date | null) {
         setSelelectedDate(date);
         globalStore.setShowMonthlyTransaction(false);
-        monthlyTransactionStore.clearTransactions();
     }
     return (
-        <div>
+        <div className="fullwidth">
             <DatePicker
                 className="budgetMonthYear"
                 showMonthYearPicker

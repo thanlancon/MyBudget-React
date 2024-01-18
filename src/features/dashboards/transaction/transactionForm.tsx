@@ -47,10 +47,8 @@ function TransactionForm() {
         statedItem.postDate = postDate ? new Date(postDate.toDateString()) : null;
         if (statedItem.id === NIL_UUID) {
             const response = await createItem(statedItem);
-            if (response) {
+            if (response.isSuccess) {
                 setSelectedItem();
-
-                transactionStore.loadData(1, 30);
             }
             handleServerResponse(response);
         }
@@ -75,7 +73,7 @@ function TransactionForm() {
         <form className='defaultform' >
             <fieldset>
                 <div className="transactionform">
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label>Transaction Date</label>
                         <div className="tranInput">
                             <DatePicker
@@ -84,7 +82,7 @@ function TransactionForm() {
                             />
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label >Post Date</label>
                         <div className="tranInput">
                             <DatePicker
@@ -93,7 +91,7 @@ function TransactionForm() {
                             />
                         </div>
                     </div>
-                    <div className='flexvertical fullwidth'>
+                    <div className='flexcolumn fullwidth'>
                         <label htmlFor='inflow'>Inflow</label>
                         <input name='inflow'
                             type='text'
@@ -102,7 +100,7 @@ function TransactionForm() {
                             value={statedItem.inflow}
                             onChange={handleInputChange} />
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label htmlFor='outflow'>Outflow</label>
                         <div className="tranInput">
                             <input name='outflow' placeholder='Outflow'
@@ -111,34 +109,36 @@ function TransactionForm() {
                                 onChange={handleInputChange} />
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label htmlFor='envelopeId'>Envelope</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='envelopeId' placeholder="Select Envelope" defaultValue={statedItem.envelopeId} options={envelopes} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
 
-                    <div className='flexvertical'>
-                        <label htmlFor='payeeId'>Payee</label>
-                        <button className='buttonplus' type='button' onClick={() => handleAddPayee()}>+</button>
+                    <div className='flexcolumn'>
+                        <div className="flexrow">
+                            <label htmlFor='payeeId'>Payee</label>
 
+                            <button className='buttonplus' type='button' onClick={() => handleAddPayee()}>+</button>
+                        </div>
                         <div className="tranInput">
                             <Form.Select search clearable name='payeeId' placeholder="Select Payee" defaultValue={statedItem.payeeId} options={payees} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label htmlFor='bankId'>Bank</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='bankId' placeholder="Select bank" defaultValue={statedItem.bankId} options={bankAccounts} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label htmlFor='bankId_Transfer'>Bank Transfer</label>
                         <div className="tranInput">
                             <Form.Select search clearable name='bankId_Transfer' placeholder="Select bank transfer" defaultValue={statedItem.bankId_Transfer} options={bankAccounts} onChange={handleSelect}></Form.Select>
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label htmlFor='outflow'>Note</label>
                         <textarea className='tranTextArea' name='note' placeholder='Note'
                             value={statedItem.note ? statedItem.note : ''}
@@ -148,7 +148,7 @@ function TransactionForm() {
                 </div>
             </fieldset>
             <div>
-                <div className='flexvertical'>
+                <div className='flexcolumn'>
                     <div className="fullwidth"></div>
                     <button className='savebutton buttonsm' type='button' onClick={handleSubmit}>Save</button>
                 </div>

@@ -13,9 +13,7 @@ function EnvelopeDashBoard() {
         envelopeStore.loadMonthlyEnvelopeBalances(getBudgetMonth, getBudgetYear);
     }, [envelopeStore, getBudgetMonth, getBudgetYear]);
     return (
-        <div className='dashboardcontent fullwidth' >
-            <EnvelopeList />
-        </div>
+        <EnvelopeList />
     )
 }
 

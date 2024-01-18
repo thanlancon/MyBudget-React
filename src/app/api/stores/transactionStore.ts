@@ -26,6 +26,7 @@ export class TransactionStore {
         this._bankId = value;
         this.clearTransactions();
     }
+
     get axiosParams() {
         const params = new URLSearchParams();
         params.append('pageNumber', this.pagingParams.pageNumber.toString());
@@ -116,8 +117,8 @@ export class TransactionStore {
     setPagination = (pagination: Pagination | null) => {
         this.pagination = pagination;
     }
-    setSelectedItem = (id: string | undefined = '') => {
-        this.selectedItem = id ? this.transactions.find(b => b.id === id) : undefined
+    setSelectedItem = (id: string | undefined = undefined) => {
+        this.selectedItem = id ? this.transactions.find(b => b.id === id) : undefined;
     }
     setEmptyTransaction = () => {
         this.setSelectedItem();
@@ -161,18 +162,13 @@ export class TransactionStore {
             const copyItem = { ...item };
             // postedItem.id = uuid4();
             const response = await Agent.Transactions.create(copyItem);
-            runInAction(() => {
-                if (response.isSuccess) {
-                    this.loadData();
-                }
-            });
             this.setIsLoadingData(false);
             return response;
         }
         catch (error) {
             handleError(error);
             this.setIsLoadingData(false);
-            return Result.Failure(error);
+            return Result.Failure<string>("False to create transaction!");
         }
 
     }

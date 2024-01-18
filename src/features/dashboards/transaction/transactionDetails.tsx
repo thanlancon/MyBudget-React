@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NIL as NIL_UUID } from 'uuid';
 import "../../../../public/myfunctions"
 import { dateToString } from "../../../../public/myfunctions";
+import handleServerResponse from "../../../app/api/handleresponemessage";
 
 function TransactionDetails() {
 
@@ -27,11 +28,22 @@ function TransactionDetails() {
         totalBalance: 0,
         note: ''
     }
+    async function  clickDelete() {
+        const confirmtext = prompt("Type 'yes' to confirm if you want to delete transaction!!!", 'no');
+        if (confirmtext?.toLowerCase() === 'yes') {
+            if (selectedItem) {
+                const response = await transactionStore.deleteItem(selectedItem?.id);
+                if (response.isSuccess) {
+                    handleServerResponse(response);
+                }
+            }
+        }
+    }
     return (
         <form className='defaultform'>
             <fieldset>
                 <div className="transactionform">
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label>Transaction Date</label>
                         <div className="tranInput">
                             <input type='text'
@@ -40,7 +52,7 @@ function TransactionDetails() {
                             />
                         </div>
                     </div>
-                    <div className='flexvertical'>
+                    <div className='flexcolumn'>
                         <label >Post Date</label>
                         <div className="tranInput">
                             <input type='text'
@@ -49,67 +61,77 @@ function TransactionDetails() {
                             />
                         </div>
                     </div>
-                <div className='flexvertical'>
-                    <label htmlFor='inflow'>Inflow</label>
-                    <input name='inflow'
-                        type='text'
-                        placeholder='Inflow'
-                        className='currencyinput'
-                        value={itemDetail.inflow}
-                        readOnly
-                    />
-                </div>
-                <div className='flexvertical'>
-                    <label htmlFor='outflow'>Outflow</label>
-                    <div className="tranInput">
-                        <input name='outflow' placeholder='Outflow'
+                    <div className='flexcolumn'>
+                        <label htmlFor='inflow'>Inflow</label>
+                        <input name='inflow'
+                            type='text'
+                            placeholder='Inflow'
                             className='currencyinput'
-                            value={itemDetail.outflow}
+                            value={itemDetail.inflow}
+                            readOnly
+                        />
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='outflow'>Outflow</label>
+                        <div className="tranInput">
+                            <input name='outflow' placeholder='Outflow'
+                                className='currencyinput'
+                                value={itemDetail.outflow}
+                                readOnly
+                            />
+                        </div>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='envelopeId'>Envelope</label>
+                        <div className="tranInput">
+                            <input type='text' name='envelopeId' value={envelopes.find(x => x.value === itemDetail.envelopeId)?.text}
+                                readOnly
+                            ></input>
+                        </div>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='payeeId'>Payee</label>
+                        <div className="tranInput">
+                            <input type='text' name='payeeId' value={payees.find(x => x.value === itemDetail.payeeId)?.text}
+                                readOnly
+                            ></input>
+                        </div>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='bankId'>Bank</label>
+                        <div className="tranInput">
+                            <input type='text' name='bankId' value={bankAccounts.find(x => x.value === itemDetail.bankId)?.text}
+                                readOnly
+                            ></input>
+                        </div>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='bankId_Transfer'>Bank Transfer</label>
+                        <div className="tranInput">
+                            <input type='text' name='bankId_Transfer' value={bankAccounts.find(x => x.value === itemDetail.bankId_Transfer)?.text}
+                                readOnly
+                            ></input>
+                        </div>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='outflow'>Note</label>
+                        <textarea className='tranTextArea' name='note' placeholder='Note'
+                            value={itemDetail.note ? itemDetail.note : ''}
                             readOnly
                         />
                     </div>
                 </div>
-                <div className='flexvertical'>
-                    <label htmlFor='envelopeId'>Envelope</label>
-                    <div className="tranInput">
-                        <input type='text' name='envelopeId' value={envelopes.find(x => x.value === itemDetail.envelopeId)?.text}
-                            readOnly
-                        ></input>
-                    </div>
-                </div>
-                <div className='flexvertical'>
-                    <label htmlFor='payeeId'>Payee</label>
-                    <div className="tranInput">
-                        <input type='text' name='payeeId' value={payees.find(x => x.value === itemDetail.payeeId)?.text}
-                            readOnly
-                        ></input>
-                    </div>
-                </div>
-                <div className='flexvertical'>
-                    <label htmlFor='bankId'>Bank</label>
-                    <div className="tranInput">
-                        <input type='text' name='bankId' value={bankAccounts.find(x => x.value === itemDetail.bankId)?.text}
-                            readOnly
-                        ></input>
-                    </div>
-                </div>
-                <div className='flexvertical'>
-                    <label htmlFor='bankId_Transfer'>Bank Transfer</label>
-                    <div className="tranInput">
-                        <input type='text' name='bankId_Transfer' value={bankAccounts.find(x => x.value === itemDetail.bankId_Transfer)?.text}
-                            readOnly
-                        ></input>
-                    </div>
-                </div>
-                <div className='flexvertical'>
-                    <label htmlFor='outflow'>Note</label>
-                    <textarea className='tranTextArea' name='note' placeholder='Note'
-                        value={itemDetail.note ? itemDetail.note : ''}
-                        readOnly
-                    />
-                </div>
+
+            </fieldset >
+            <div className='flexrow colgapxl'
+                style={{ justifyContent: 'flex-start', alignContent: 'center' }}
+            >
+                <div className="fullwidth"></div>
+                <button className='deletebutton buttonsm' type='button' style={{ width: 'min-content' }}
+                    onClick={() => clickDelete()}
+                >Delete</button>
+                <div className="fullwidth"></div>
             </div>
-        </fieldset >
         </form >
     )
 }

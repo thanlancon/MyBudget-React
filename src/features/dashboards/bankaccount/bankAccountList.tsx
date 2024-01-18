@@ -8,17 +8,19 @@ function BankAccountList() {
     const { bankAccountStore } = useStore();
     const { bankAccounts } = bankAccountStore;
     const navigate=useNavigate();
-    function clickCode(bankId: string) {
-        navigate(RouterURL.getTransactionURL(bankId));
+    function clickCode(bankId: string,bankcode:string) {
+        navigate(RouterURL.getTransactionsURL(bankId,bankcode));
     }
     return (
-        <div className="grid gridcol2 table">
+        <div className="grid gridcol2 table max-content-width">
             <div className="tabletitle titletext">Name</div>
             <div className="tabletitle titletext">Balance</div>
             {bankAccounts.map((item) => (
                 <>
-                    <div className="hover" onClick={() => clickCode(item.id)}>{item.code}</div>
-                    <div className="flexhorizontal flexmiddleright">
+                    <div className="hover" onClick={() => clickCode(item.id,item.code)}>{item.code}</div>
+                    <div className="flexrow"
+                    style={{justifyContent:'right'}}
+                    >
                         <span className={`currency ${item.totalBalance >= 0 ? 'possitivecurrency' : 'negativecurrency'}`}>{formatCurrencyNumber(item.totalBalance)}</span>
                     </div>
                 </>

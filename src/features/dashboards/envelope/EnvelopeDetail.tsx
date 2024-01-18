@@ -7,7 +7,7 @@ import { NIL as NIL_UUID } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { RouterURL } from "../../../app/api/routers/routerURL";
 
-function EnvelopeEdit() {
+function EnvelopeDetail() {
     const navigate=useNavigate();
 
     const { envelopeStore } = useStore();
@@ -61,4 +61,4 @@ function EnvelopeEdit() {
         </div>
     )
 }
-export default observer(EnvelopeEdit);
+export default observer(EnvelopeDetail);

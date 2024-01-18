@@ -18,7 +18,7 @@ function BankAccountTypeList() {
         loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <div className="flexvertical fullwidth">
+        <div className="flexvertical max-content-width">
             <div className="grid gridcol2 table">
                 <div className="tabletitle titletext">Name</div>
                 <div className="tabletitle titletext">Balance</div>

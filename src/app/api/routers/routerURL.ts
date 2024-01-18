@@ -1,3 +1,4 @@
+
 const urlHome = '/';
 const pathHome = urlHome;
 const getHomeURL = () => (urlHome)
@@ -7,7 +8,7 @@ const pathBanks = urlBanks;
 
 const urlBankAccounts = '/bankaccounts';
 const pathBankAccounts = urlBankAccounts;
-const getBankAccountURL=()=>(urlBankAccounts);
+const getBankAccountURL = () => (urlBankAccounts);
 
 const urlBankAccountTypes = '/bankaccounttypes';
 const pathBankAccountTypes = urlBankAccountTypes;
@@ -17,27 +18,31 @@ const pathCategories = urlCategories;
 
 const urlEnvelopes = '/envelopes';
 const pathEnvelopes = urlEnvelopes;
-const getEnvelopeURL=()=>(urlEnvelopes);
+const getEnvelopeURL = () => (urlEnvelopes);
 
 const urlPayees = '/payees';
 const pathPayees = urlPayees;
 
 const paramBankID = 'bankid';
-const urlTransactions = '/transactions/bank';
-const pathTransactions = `${urlTransactions}/:${paramBankID}`;
-const getTransactionURL=(bankid:string)=>{
-    return `${urlTransactions}/${bankid}`;
+const paramBankCode = 'bankcode';
+const urlTransactions = '/transactions';
+const pathTransactions = `${urlTransactions}/:${paramBankID}/:${paramBankCode}`;
+const getTransactionsURL = (bankid: string, bankcode: string) => {
+    return `${urlTransactions}/${bankid}/${bankcode}`;
 }
 const paramTransactionID = 'transactionid';
 const urlTransactionDetail = '/transaction';
 const pathTransactionDetail = `${urlTransactionDetail}/:${paramTransactionID}`;
-const getTransactionDetailURL=(transactionid:string)=>{
+const getTransactionDetailURL = (transactionid: string) => {
     return `${urlTransactionDetail}/${transactionid}`;
 }
+const urlNewTransaction = '/newtran';
+const pathNewTransaction = urlNewTransaction;
+const getNewTransactionURL = () => (urlNewTransaction)
 
-const urlEnvelopEdit = `/envelope/edit`;
-const pathEndvelopeEdit = urlEnvelopEdit;
-const getEnvelopeEditURL = () => { return urlEnvelopEdit };
+const urlEnvelopDetail = `/envelope/edit`;
+const pathEnvelopeDetail = urlEnvelopDetail;
+const getEnvelopeEditURL = () => { return urlEnvelopDetail };
 
 export const RouterURL = {
     pathBanks,
@@ -46,14 +51,16 @@ export const RouterURL = {
     pathEnvelopes,
     pathPayees,
     pathTransactions,
-    pathEndvelopeEdit,
+    pathEnvelopeDetail,
     pathHome,
     pathBankAccounts,
     pathTransactionDetail,
+    pathNewTransaction,
     getBankAccountURL,
     getHomeURL,
     getEnvelopeEditURL,
     getEnvelopeURL,
-    getTransactionURL,
-    getTransactionDetailURL
+    getTransactionsURL,
+    getTransactionDetailURL,
+    getNewTransactionURL
 };

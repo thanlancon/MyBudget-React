@@ -1,32 +1,40 @@
 :root {
     --button-color: rgba(46, 230, 9, 0.437);
     --body-background-color: rgba(27, 26, 26, 0.893);
-    --screen-small:400px;
-    --screen-medium:800px;
-    --screen-large:2000px;
+    --screen-small: 400px;
+    --screen-medium: 800px;
+    --screen-large: 2000px;
 }
-
+#root{
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: center;
+    width: 100% !important;
+    background-color: var(--body-background-color) !important;
+}
 body {
     height: 100% !important;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
     background-color: var(--body-background-color) !important;
 }
 
-.mainbody {
-    min-width: 100%;
+.appframe{
+    justify-content:flex-start;
+    align-items: center;
 }
-
 @media (min-width:1000px) {
     .mainbody {
         width: 800px;
     }
 }
 
-@media (max-width:800px) {
+@media (max-width:999px) {
     .mainbody {
-        width: 100%;
+        width: 98%;
     }
 }
 
@@ -45,34 +53,19 @@ body {
     background-color: white;
 }
 
-.left {
-    flex: 1 1 0
-}
-
-.right {
-    flex: 2 1 0
-}
-
-.middle {
-    flex: 5 1 0
-}
 
 .maintopnav {
     align-items: center;
     height: 4rem;
+    gap: 1rem;
 }
 
-.maintopnav:first-child {
-    flex: 1 1 0;
-}
+
 
 .ui.vertical.menu {
     width: 6em !important;
 }
 
-.maintopnav div+div {
-    flex: 5 1 0;
-}
 
 .leftcontent {
     overflow: auto;
@@ -80,9 +73,12 @@ body {
 }
 
 .middlecontent {
-    justify-content: center;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     overflow: auto;
+    width:100%;
     height: 90vh;
     background-image: linear-gradient(180deg, rgb(178, 229, 231) 30%, rgb(144, 232, 235) 50%, rgb(147, 233, 236) 20%)
 }
@@ -176,6 +172,8 @@ form[class='default'] input {
     margin-right: auto;
     margin-top: 1em;
     background-color: rgb(137, 234, 144);
+    width: max-content;
+    height: max-content;
 }
 
 input {
@@ -340,6 +338,10 @@ label {
     width: 50px;
 }
 
+.bankaccounttypelist {
+    max-width: max-content;
+}
+
 
 .categoryform {
     width: 350px;
@@ -382,11 +384,12 @@ label {
 
 
 .dashboardtitle {
-    grid-area: 'title';
-    display: grid;
-    grid-template-columns: 1fr 40px;
-    background-color: rgb(226, 245, 245);
-    flex-basis: 2000px;
+    background-color: rgb(79, 240, 127);
+    font-size:2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .dashboardtitle>:first-child {
@@ -402,20 +405,11 @@ label {
 }
 
 
-.dashboardcontent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .fullwidth {
     width: 100%;
 }
 
 .envelopelist {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
     height: 100%;
 }
@@ -578,29 +572,28 @@ div.enveloperow>.number {
 }
 
 /* style for transaction */
-@media (min-width:400px){
-    .transactionform{
+@media (min-width:401px) {
+    .transactionform {
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1em;
         width:max-content;
     }
 }
-@media (max-width:400px){
-    .transactionform{
+
+@media (max-width:400px) {
+    .transactionform {
         display: grid;
-        grid-template-columns: repeat(1,1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 1em;
-        width:100%;
+        width:max-content;
     }
 }
-.transactionform{
-    display: grid;
-    gap: 1em;
-}
+
 .transactionmodal {
     width: 750px !important;
 }
+
 .futureTransaction {
     color: rgb(146, 166, 186);
 }
@@ -611,10 +604,12 @@ div.enveloperow>.number {
     column-gap: 3px;
 
 }
-.hover:hover{
+
+.hover:hover {
     cursor: pointer;
     background-color: rgb(219, 228, 237);
 }
+
 .oddrowcolor {
     background-color: rgba(249, 245, 245, 0.678);
 }

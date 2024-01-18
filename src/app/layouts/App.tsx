@@ -6,15 +6,13 @@ import { UserFormValues } from '../models/user';
 import Modalform from './common/modalform';
 import ModalMenu from './common/modalMenu';
 import { Outlet } from 'react-router';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BudgetMonth from './common/BudgetMonth';
-import { RouterURL } from '../api/routers/routerURL';
 
 function App() {
 
-  const { userStore, globalStore, monthlyTransactionStore } = useStore();
+  const { userStore } = useStore();
   const navigate = useNavigate();
-  const location = useLocation();
 
 
   useEffect(() => {
@@ -31,32 +29,29 @@ function App() {
     navigate('envelopes');
   }, [])
 
-  useEffect(() => {
-    if (location.pathname !== RouterURL.pathEnvelopes) {
-      globalStore.setShowMonthlyTransaction(false);
-      monthlyTransactionStore.clearTransactions();
-    }
-  }, [location.pathname]);
+
   return (
-    <div className='mainbody'>
-      <Modalform />
-      <ModalMenu />
-      <div className='flexhorizontal mainpagebackground maintopnav'>
-        <div  >
-          <DropDownMenu />
+    <div className='flexcolumn fullwidth appframe'>
+      <div className='mainbody'>
+        <Modalform />
+        <ModalMenu />
+        <div className='flexrow mainpagebackground maintopnav'>
+          <div  className='max-content-width'>
+            <DropDownMenu />
+          </div>
+          <div className='flexrow fullwidth'
+           >
+            <BudgetMonth />
+          </div>
         </div>
-        <div className='flexhorizontal flexallmiddle' >
-          <BudgetMonth />
-        </div>
+        <div className='divider'></div>
+        <div className='flexcolumn mainpagebackground fullwidth'>
+          <div className='middlecontent'>
+            <Outlet />
+          </div>
+
+        </div >
       </div>
-      <div className='divider'></div>
-      <div className='flexhorizontal mainpagebackground'>
-
-        <div className='middle flexhorizontal middlecontent'>
-          <Outlet />
-        </div>
-
-      </div >
     </div>
   )
 }

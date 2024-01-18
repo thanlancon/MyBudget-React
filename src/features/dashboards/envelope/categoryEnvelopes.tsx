@@ -71,7 +71,7 @@ function CategoryEnvelopes({ category }: Props) {
         navigate(RouterURL.getEnvelopeEditURL());
     }
     return (
-        <>
+        <div className='flexvertical fullwidth'>
             <div className='categoryrow' key={category.value} onContextMenu={showCategoryMenu(category.value, category.text)}
                 onClick={clickCategory}
             >{category.text}</div>
@@ -82,7 +82,7 @@ function CategoryEnvelopes({ category }: Props) {
                     envelopes.map((b) => (
                         b.categoryId === category.value &&
                         <>
-                            <div className='name'
+                            <div className='name hover'
                                 onClick={() => clickEnvelopeName(b.id)}
                             >{b.name}</div>
                             <div className='number'
@@ -98,7 +98,7 @@ function CategoryEnvelopes({ category }: Props) {
                     ))
                 }
             </div >
-        </>
+        </div>
     )
 }
 export default observer(CategoryEnvelopes)

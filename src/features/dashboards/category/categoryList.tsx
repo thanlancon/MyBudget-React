@@ -19,7 +19,7 @@ function CategoryList() {
         loadData(parseInt(data.activePage ? data.activePage?.toString() : '1'));
     }
     return (
-        <div className="flexvertial fullwidth">
+        <div className="flexvertial max-content-width">
             <div className="grid gridcol1 table">
                 <div className="tabletitle titletext">Name</div>
                 {categories.map((item) => (

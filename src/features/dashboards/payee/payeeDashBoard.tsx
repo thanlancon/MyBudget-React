@@ -3,8 +3,11 @@ import PayeeList from "./payeeList";
 
 function EnvelopeDashBoard() {
     return (
-        <div  >
-            <PayeeList />
+        <div className="flexcolumn fullwidth">
+            <div className="fullwidth dashboardtitle textcenter">Payees</div>
+            <div className="flexrow fullwidth" style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
+                <PayeeList />
+            </div>
         </div>
     )
 }

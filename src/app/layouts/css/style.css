@@ -1,34 +1,15 @@
 
-.flexvertical{
-    display: flex;
-    flex-direction: column;
-
-}
-.flexhorizontal{
+.flexrow{
     display: flex;
     flex-direction: row;
 
 }
-.flexhorizontaltopcenter{
-    justify-content: center;
-    align-items: flex-start;
+.flexcolumn{
+    display: flex;
+    flex-direction: column;
+
 }
-.flexverticaltopcenter{
-    justify-content:flex-start;
-    align-items:end;
-}
-.flexallmiddle{
-    justify-content: center;
-    align-items: center;
-}
-.flexmiddleleft{
-    justify-content: left;
-    align-items: center;
-}
-.flexmiddleright{
-    justify-content: right;
-    align-items: center;
-}
+
 .grid{
     display:grid
 }
@@ -43,6 +24,9 @@
 }
 .gridcol4{
     grid-template-columns: repeat(4,1fr);
+}
+.gridcol3{
+    grid-template-columns: repeat(3,1fr);
 }
 .gridcol5{
     grid-template-columns: repeat(5,1fr);
@@ -60,13 +44,30 @@
 .textleft{
     text-align: left;
 }
-.righttext{
+.textright{
     text-align: right;
 }
-
+.textcenter{
+    text-align: center;
+}
 .buttonsm{
     padding: .25em;
 }
 .colgapsm{
     column-gap: .25em;
+}
+.colgapmedium{
+    column-gap: 2em;
+}
+.colgaplg{
+    column-gap: 2em;
+}
+.colgapxl{
+    column-gap: 3em;
+}
+.max-content-width{
+    width: max-content;
+}
+.max-content-height{
+    height:max-content;
 }

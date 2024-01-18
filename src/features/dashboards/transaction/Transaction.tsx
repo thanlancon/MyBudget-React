@@ -9,16 +9,24 @@ import TransactionDetails from "./transactionDetails";
 function Transaction() {
     const navigate = useNavigate();
     const { transactionStore } = useStore();
-    const { setSelectedItem,bankID } = transactionStore;
+    const { setSelectedItem, selectedItem } = transactionStore;
     const [showNewForm, setShowNewForm] = useState(false);
-    const [showDetail, setShowDetail] = useState(true);
+    const [showDetail, setShowDetail] = useState(false);
     let { transactionid } = useParams();
     useEffect(() => {
         setSelectedItem(transactionid);
-    }, []);
+        if (selectedItem?.id) {
+            setShowDetail(true);
+            setShowNewForm(false);
+        }
+        else {
+            setShowDetail(false);
+            setShowNewForm(true);
+        }
+    }, [transactionid,selectedItem]);
     function clickClose() {
         setSelectedItem();
-        navigate(RouterURL.getTransactionURL(bankID));
+        navigate(RouterURL.getBankAccountURL());
     }
     function clickNew() {
         setSelectedItem(undefined);
@@ -26,15 +34,17 @@ function Transaction() {
         setShowNewForm(true);
     }
     return (
-        <div className="flexvertical fullwidth">
-            <div className="flexhorizontal flexallmiddle fullwidth ">
-                <div className="flexhorizontal colgapsm">
+        <div className="flexcolumn fullwidth">
+
+            <div className="flexrow fullwidth" style={{ justifyContent: 'center' }}>
+                <div className="flexrow colgapsm">
                     <button className="buttonsm closebutton" onClick={clickClose} >Close</button>
                     <button className="buttonsm" onClick={clickNew}>New</button>
                 </div>
             </div>
             {showNewForm && <TransactionForm />}
             {showDetail && <TransactionDetails />}
+
         </div>
     )
 }

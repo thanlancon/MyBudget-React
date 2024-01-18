@@ -74,11 +74,10 @@ function TransactionList() {
                 <div>Tran. Date</div>
                 {/* <div>Post. Date</div> */}
                 {/* <div>Bank</div> */}
-                <div>Transfer Bank</div>
-                <div>Payee Name</div>
+                <div>Payee/Trans. Bank</div>
                 {/* <div>Envelope Name</div> */}
                 <div style={{ textAlign: 'right' }}>Activity</div>
-                {/* <div style={{ textAlign: 'right' }}>Total Balance</div> */}
+                <div style={{ textAlign: 'right' }}>Total Balance</div>
             </div>
             <div className="flexvertial">
                 {transactions.map((b, index) => (
@@ -90,11 +89,11 @@ function TransactionList() {
                         <div style={{ paddingLeft: '1rem' }} className="gridcellmiddleleft" >{dateToString(b.transactionDate)}</div>
                         {/* <div className="gridcellmiddleleft">{dateToString(b.postDate)}</div> */}
                         {/* <div className="gridcellmiddleleft">{bankAccounts.find(x => x.value === b.bankId)?.text}</div> */}
-                        <div className="gridcellmiddleleft">{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</div>
-                        <div className="gridcellmiddleleft">{payees.find(x => x.value === b.payeeId)?.text}</div>
+                        {/* <div className="gridcellmiddleleft">{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</div> */}
+                        <div className="gridcellmiddleleft">{payees.find(x => x.value === b.payeeId)?.text}{bankAccounts.find(x => x.value === b.bankId_Transfer)?.text}</div>
                         {/* <div className="gridcellmiddleleft">{envelopes.find(x => x.value === b.envelopeId)?.text}</div> */}
                         <div className={`cellnumber gridcellmiddleright ${(b.inflow - b.outflow) < 0 ? 'negativecurrency' : 'possitivecurrency'}`}>{formatCurrencyNumber(b.inflow - b.outflow)}</div>
-                        {/* <div className='cellnumber gridcellmiddleright'>{formatCurrencyNumber(b.totalBalance)}</div> */}
+                        <div className='cellnumber gridcellmiddleright'>{formatCurrencyNumber(b.totalBalance)}</div>
                     </div>
                 ))}
             </div>
