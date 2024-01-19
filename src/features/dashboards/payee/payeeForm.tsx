@@ -32,23 +32,22 @@ function PayeeForm({  reloadList = true }) {
             setStatedItem(emptyItem);
             handleServerResponse(response);
         }
-        
+
     }
     function handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
         const { name, value } = event.target;
         setStatedItem({ ...statedItem, [name]: value });
     }
     return (
-        <div className='payeeform'>
             <form className='defaultform'>
                 <fieldset>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='payeelabel' htmlFor='name'>Name</label>
                         <input className='payeeInput' name='name' placeholder='Name'
                             value={statedItem.name}
                             onChange={handleChange} />
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='payeelabel' htmlFor='description'>Description</label>
                         <textarea className='payeeTextArea' name='description' placeholder='Description'
                             value={statedItem.description}
@@ -59,7 +58,6 @@ function PayeeForm({  reloadList = true }) {
                     <button className='save' type='button' onClick={handleSubmit}>Save</button>
                 </div>
             </form>
-        </div>
     )
 }
 

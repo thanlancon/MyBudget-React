@@ -16,7 +16,6 @@ function BudgetMonth() {
         globalStore.setShowMonthlyTransaction(false);
     }
     return (
-        <div className="fullwidth">
             <DatePicker
                 className="budgetMonthYear"
                 showMonthYearPicker
@@ -26,7 +25,6 @@ function BudgetMonth() {
                 placeholderText="Select Budget Month"
                 onChange={(date) => handleDateChange(date)}
             />
-        </div>
     );
 }
 export default observer(BudgetMonth);

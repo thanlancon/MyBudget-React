@@ -45,9 +45,11 @@ function EnvelopeDetail() {
         setShowForm(true);
     }
     return (
-        <div className="flexvertical fullwidth">
-            <div className="flexhorizontal flexallmiddle fullwidth ">
-                <div className="flexhorizontal colgapsm">
+        <div className="flexcolumn fullwidth">
+            <div className="flexrow fullwidth "
+            style={{justifyContent:'center',alignItems:'center'}}
+            >
+                <div className="flexrow colgapsm">
                     <button className="buttonsm closebutton" onClick={clickClose} >Close</button>
                     {!selectedItem == false && <button className="buttonsm" onClick={clickView} >View Detail</button>}
                     {!selectedItem == false && <button className="buttonsm" onClick={clickTransfer} >Transfer</button>}

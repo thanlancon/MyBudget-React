@@ -29,9 +29,7 @@ function Transaction() {
         navigate(RouterURL.getBankAccountURL());
     }
     function clickNew() {
-        setSelectedItem(undefined);
-        setShowDetail(false);
-        setShowNewForm(true);
+        navigate(RouterURL.getNewTransactionURL());
     }
     return (
         <div className="flexcolumn fullwidth">

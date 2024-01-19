@@ -8,9 +8,9 @@
 #root{
     height: 100% !important;
     display: flex !important;
-    flex-direction: column;
+    flex-direction: column !important;
     justify-content: flex-start !important;
-    align-items: center;
+    align-items: center !important;
     width: 100% !important;
     background-color: var(--body-background-color) !important;
 }
@@ -37,7 +37,23 @@ body {
         width: 98%;
     }
 }
+@media (min-width:401px) {
+    .transactionform {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+        width:max-content;
+    }
+}
 
+@media (max-width:400px) {
+    .transactionform {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1em;
+        width:max-content;
+    }
+}
 .ui.item.dropdown {
     display: flex !important;
     align-items: center;
@@ -363,8 +379,8 @@ label {
 }
 
 .budgetMonthYear {
-    width: 100px !important;
-    height: 100% !important;
+    width: 150px !important;
+    height: min-content !important;
     color: blue !important;
     font-weight: bold;
     font-size: 20pt;
@@ -551,7 +567,8 @@ div.enveloperow>.number {
 }
 
 .payeeFormModal {
-    width: 400px !important;
+    width: min-content !important;
+    height: min-content;
 }
 
 .payeeform {
@@ -572,23 +589,7 @@ div.enveloperow>.number {
 }
 
 /* style for transaction */
-@media (min-width:401px) {
-    .transactionform {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1em;
-        width:max-content;
-    }
-}
 
-@media (max-width:400px) {
-    .transactionform {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1em;
-        width:max-content;
-    }
-}
 
 .transactionmodal {
     width: 750px !important;

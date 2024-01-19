@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../../app/api/stores/stores"
 import { DropdownProps, Select } from "semantic-ui-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import handleServerResponse, { handleError } from "../../../app/api/handleresponemessage";
 import { NIL as NIL_UUID } from "uuid";
 
@@ -23,6 +23,9 @@ function EnvelopeForm() {
     }
 
     const [statedItem, setStatedItem] = useState(selectedItem ? selectedItem : initialItem);
+    useEffect(()=>{
+        setStatedItem(selectedItem ? selectedItem : initialItem);
+    },[selectedItem]);
     async function handleSubmit() {
         try {
             if (statedItem.id) {
@@ -65,45 +68,43 @@ function EnvelopeForm() {
         }
     }
     return (
-        <div className='envelopeform'>
             <form className='defaultform'>
                 <fieldset>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='enveLabel' htmlFor='name'>Envelope Name</label>
                         <input className='enveInput' name='name' placeholder='Name'
                             value={statedItem.name}
                             onChange={handleChange} />
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='enveLabel' htmlFor='categoryId'>Category</label>
                         <Select name='categoryId' placeholder='Select category' defaultValue={statedItem.categoryId} options={categories} onChange={handleSelectedChange}
                             clearable search />
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='enveLabel' htmlFor='envelopeId_Funding'>Funded From</label>
                         <Select name='envelopeId_Funding' placeholder='Select envelope' defaultValue={statedItem.envelopeId_Funding} options={envelopes} onChange={handleSelectedChange}
                             clearable search />
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='enveLabel' htmlFor='description'>Description</label>
                         <textarea className='enveTextArea' name='description' placeholder='Description'
                             value={statedItem.description}
                             onChange={handleChange} />
                     </div>
-                    <div className='formrowgroup'>
+                    <div className='flexcolumn'>
                         <label className='enveLabel' htmlFor='totalBalance'>Total Balance</label>
                         <input className='enveInput' disabled name='totalBalance' placeholder='Total Balance'
                             value={statedItem.totalBalance}
                             onChange={handleChange} />
                     </div>
                 </fieldset>
-                <div className='flexhorizontal'>
+                <div className='flexrow'>
                     <button className='deletebutton buttonsm' type='button' onClick={clickDelete}>Delete</button>
                     <div className="fullwidth"></div>
                     <button className='savebutton buttonsm' type='button' onClick={handleSubmit}>Save</button>
                 </div>
             </form>
-        </div >
     )
 }
 

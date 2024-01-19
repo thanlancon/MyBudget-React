@@ -39,10 +39,11 @@ function App() {
           <div  className='max-content-width'>
             <DropDownMenu />
           </div>
-          <div className='flexrow fullwidth'
+          <div className='flexrow min-content-width'
            >
             <BudgetMonth />
           </div>
+          <div className='fullwidth'></div>
         </div>
         <div className='divider'></div>
         <div className='flexcolumn mainpagebackground fullwidth'>
