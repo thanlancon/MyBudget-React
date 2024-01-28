@@ -23,7 +23,7 @@ function CategoryList() {
             <div className="grid gridcol1 table">
                 <div className="tabletitle titletext">Name</div>
                 {categories.map((item) => (
-                    <div className="hover">{item.name}</div>
+                    <div className="hover" key={item.id}>{item.name}</div>
                 ))}
             </div>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>

@@ -18,35 +18,15 @@ import { EnvelopeBalance } from "../models/monthlyEnvelopeBalance";
 //handle request/response for Bank
 //////////////////////////////////
 
-
-const getCurrentHost =
-    // import.meta.env.MODE === "development"
-    //     ? "http://localhost:4000/api"
-    //     : "https://52.3.99.42:100/api";
-    import.meta.env.MODE === "development"
-        ? "http://localhost:4000/api"
-        : "http://www.khuongle.net:100/api";
-    // import.meta.env.MODE === "development"
-    //     ? "http://localhost:4000/api"
-    //     : "http://192.168.1.51:4000/api";
-
+const getCurrentHost =import.meta.env.VITE_API_BASE_URL;
 const baseUrl = getCurrentHost;
 axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(config => {
-    const token = store.commonStore.token;
+    const token = store.commonStore.Token;
     if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
     return config;
 })
 
-
-
-//store CRUD request functions
-// const requests = {
-//     get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-//     post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
-//     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-//     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody)
-// }
 const requests = {
     getpaging: (url: string, params: URLSearchParams) => axios.get<PaginatedResult<any>>(url, { params })
         .then(
@@ -88,7 +68,7 @@ const requests = {
     post: (url: string, body: {}) => axios.post<Result<any>>(url, body).then(
         response => {
             if (response.status === 200) {
-                return Result.Success<any>();
+                return Result.Success<any>(response.data);
             }
             return Result.Failure<any>(response.data);
         }).catch(error => {

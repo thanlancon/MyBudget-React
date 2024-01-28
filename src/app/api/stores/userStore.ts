@@ -19,6 +19,7 @@ export default class UserStore {
     login = async (creds: UserFormValues) => {
         try {
             const result = await agent.Account.login(creds);
+
             if (result.isSuccess) {
                 if (result.data) {
                     const user = result.data;

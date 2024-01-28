@@ -41,6 +41,7 @@ function TransactionForm() {
 
     const [transactionDate, setTransactionDate] = useState(convertToDate(statedItem.transactionDate));
     const [postDate, setPostDate] = useState(convertToDate(statedItem.postDate));
+    const [isInflow, setIsInflow] = useState(true);
 
     async function handleSubmit() {
         statedItem.transactionDate = transactionDate ? new Date(transactionDate.toDateString()) : null;
@@ -69,74 +70,67 @@ function TransactionForm() {
     function handleAddPayee() {
         setOpenPayeeForm(true);
     }
+    function clickAmount() {
+        setStatedItem({ ...statedItem, inflow: 0, outflow: 0 });
+        setIsInflow(!isInflow);
+
+    }
     return (
         <form className='defaultform' >
             <fieldset>
                 <div className="transactionform">
                     <div className='flexcolumn'>
                         <label>Transaction Date</label>
-                        <div className="tranInput">
-                            <DatePicker
-                                selected={transactionDate}
-                                onChange={(date) => setTransactionDate(date)}
-                            />
-                        </div>
+                        <DatePicker
+                            selected={transactionDate}
+                            onChange={(date) => setTransactionDate(date)}
+                        />
                     </div>
                     <div className='flexcolumn'>
                         <label >Post Date</label>
-                        <div className="tranInput">
-                            <DatePicker
-                                selected={postDate}
-                                onChange={(date) => setPostDate(date)}
-                            />
-                        </div>
+                        <DatePicker
+                            selected={postDate}
+                            onChange={(date) => setPostDate(date)}
+                        />
                     </div>
                     <div className='flexcolumn fullwidth'>
-                        <label htmlFor='inflow'>Inflow</label>
-                        <input name='inflow'
-                            type='text'
-                            placeholder='Inflow'
-                            className='currencyinput'
-                            value={statedItem.inflow}
-                            onChange={handleInputChange} />
-                    </div>
-                    <div className='flexcolumn'>
-                        <label htmlFor='outflow'>Outflow</label>
-                        <div className="tranInput">
-                            <input name='outflow' placeholder='Outflow'
-                                className='currencyinput'
-                                value={statedItem.outflow}
-                                onChange={handleInputChange} />
+                        <label
+                            className={`hover ${isInflow ? 'possitivecurrency' : 'negativecurrency'}`}
+                            onClick={clickAmount}>{isInflow ? '$$$ IN' : ''}{'(click to change)'}{isInflow ? '' : ' $$$ OUT'}</label>
+                        <div className="fullwidth">
+                            {isInflow && <input name='inflow'
+                                type='text'
+                                placeholder='Inflow'
+                                className='possitivecurrency'
+                                value={statedItem.inflow}
+                                onChange={handleInputChange} />}
+                            {!isInflow &&
+                                <input name='outflow' placeholder='Outflow'
+                                    className='negativecurrency'
+                                    value={statedItem.outflow}
+                                    onChange={handleInputChange} />
+                            }
                         </div>
                     </div>
                     <div className='flexcolumn'>
                         <label htmlFor='envelopeId'>Envelope</label>
-                        <div className="tranInput">
-                            <Form.Select search clearable name='envelopeId' placeholder="Select Envelope" defaultValue={statedItem.envelopeId} options={envelopes} onChange={handleSelect}></Form.Select>
-                        </div>
+                        <Form.Select search clearable name='envelopeId' placeholder="Select Envelope" defaultValue={statedItem.envelopeId} options={envelopes} onChange={handleSelect}></Form.Select>
                     </div>
 
                     <div className='flexcolumn'>
                         <div className="flexrow">
                             <label htmlFor='payeeId'>Payee</label>
-
                             <button className='buttonplus' type='button' onClick={() => handleAddPayee()}>+</button>
                         </div>
-                        <div className="tranInput">
-                            <Form.Select search clearable name='payeeId' placeholder="Select Payee" defaultValue={statedItem.payeeId} options={payees} onChange={handleSelect}></Form.Select>
-                        </div>
+                        <Form.Select search clearable name='payeeId' placeholder="Select Payee" defaultValue={statedItem.payeeId} options={payees} onChange={handleSelect}></Form.Select>
                     </div>
                     <div className='flexcolumn'>
                         <label htmlFor='bankId'>Bank</label>
-                        <div className="tranInput">
-                            <Form.Select search clearable name='bankId' placeholder="Select bank" defaultValue={statedItem.bankId} options={bankAccounts} onChange={handleSelect}></Form.Select>
-                        </div>
+                        <Form.Select search clearable name='bankId' placeholder="Select bank" defaultValue={statedItem.bankId} options={bankAccounts} onChange={handleSelect}></Form.Select>
                     </div>
                     <div className='flexcolumn'>
                         <label htmlFor='bankId_Transfer'>Bank Transfer</label>
-                        <div className="tranInput">
-                            <Form.Select search clearable name='bankId_Transfer' placeholder="Select bank transfer" defaultValue={statedItem.bankId_Transfer} options={bankAccounts} onChange={handleSelect}></Form.Select>
-                        </div>
+                        <Form.Select search clearable name='bankId_Transfer' placeholder="Select bank transfer" defaultValue={statedItem.bankId_Transfer} options={bankAccounts} onChange={handleSelect}></Form.Select>
                     </div>
                     <div className='flexcolumn'>
                         <label htmlFor='outflow'>Note</label>

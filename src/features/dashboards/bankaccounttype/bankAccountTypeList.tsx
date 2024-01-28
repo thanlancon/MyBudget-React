@@ -19,18 +19,16 @@ function BankAccountTypeList() {
     }
     return (
         <div className="flexvertical max-content-width">
-            <div className="grid gridcol2 table">
-                <div className="tabletitle titletext">Name</div>
-                <div className="tabletitle titletext">Balance</div>
-                {bankAccountTypes.map((item) => (
-                    <>
-                        <div className="hover">{item.code}</div>
-                        <div className="flexhorizontal flexmiddleright">
-                            {item.name}
-                        </div>
-                    </>
-                ))}
-            </div>
+            {bankAccountTypes.map((item, index) => (
+                <div className="grid gridcol2 table fullwidth">
+                    {index === 0 && <div className="tabletitle titletext">Name</div>}
+                    {index === 0 && <div className="tabletitle titletext">Balance</div>}
+                    <div className="hover">{item.code}</div>
+                    <div className="flexhorizontal flexmiddleright">
+                        {item.name}
+                    </div>
+                </div>
+            ))}
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                     boundaryRange={1}
@@ -44,7 +42,7 @@ function BankAccountTypeList() {
 
                 />
             </div>
-        </div>
+        </div >
     )
 }
 export default observer(BankAccountTypeList)

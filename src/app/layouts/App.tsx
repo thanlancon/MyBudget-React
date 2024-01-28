@@ -3,11 +3,11 @@ import { useStore } from '../api/stores/stores';
 import { observer } from 'mobx-react-lite';
 import DropDownMenu from './common/DropDownMenu';
 import { UserFormValues } from '../models/user';
-import Modalform from './common/modalform';
-import ModalMenu from './common/modalMenu';
 import { Outlet } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import BudgetMonth from './common/BudgetMonth';
+import ModalForm from './common/ModalForm';
+import ModalMenu from './common/ModalMenu';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
       username: 'tom'
     };
     userStore.login(creds);
-  }, [userStore])
+  }, [])
 
   useEffect(() => {
     navigate('envelopes');
@@ -33,7 +33,7 @@ function App() {
   return (
     <div className='flexcolumn fullwidth appframe'>
       <div className='mainbody'>
-        <Modalform />
+        <ModalForm />
         <ModalMenu />
         <div className='flexrow mainpagebackground maintopnav'>
           <div  className='max-content-width'>

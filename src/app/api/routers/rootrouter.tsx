@@ -1,5 +1,5 @@
 import {
-  createHashRouter,
+    createHashRouter
 } from "react-router-dom";
 import App from "../../layouts/App";
 import EnvelopeDashBoard from "../../../features/dashboards/envelope/envelopeDashBoard";
@@ -52,11 +52,12 @@ const router = createHashRouter([
         },
         {
             path:RouterURL.pathTransactionDetail,
-            element:<Transaction/>
+            element:<Transaction key='transactiondetail'/>,
+
         },
         {
             path:RouterURL.pathNewTransaction,
-            element:<Transaction/>
+            element:<Transaction key='newtransaction'/>
         }
     ]
   },

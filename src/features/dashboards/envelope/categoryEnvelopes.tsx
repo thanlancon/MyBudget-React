@@ -75,29 +75,28 @@ function CategoryEnvelopes({ category }: Props) {
             <div className='categoryrow' key={category.value} onContextMenu={showCategoryMenu(category.value, category.text)}
                 onClick={clickCategory}
             >{category.text}</div>
-            <div className='enveloperow'
-                key={`${category.value}-${category.value}`}
-            >
-                {showEnvelopes &&
-                    envelopes.map((b) => (
-                        b.categoryId === category.value &&
-                        <>
-                            <div className='name hover'
-                                onClick={() => clickEnvelopeName(b.id)}
-                            >{b.name}</div>
-                            <div className='number'
-                            >
-                                {formatCurrencyNumber(FindMonthlyBalance(b.id))}
-                            </div>
-                            <div
-                                className={`number ${b.totalBalance > 0 ? 'possitivecurrency' : b.totalBalance < 0 ? 'negativecurrency' : ''}`}
-                            >
-                                {formatCurrencyNumber(b.totalBalance)}
-                            </div>
-                        </>
-                    ))
-                }
-            </div >
+
+            {showEnvelopes &&
+                envelopes.map((b) => (
+                    b.categoryId === category.value &&
+                    <div className='enveloperow'
+                        key={b.id}
+                    >
+                        <div className='name hover'
+                            onClick={() => clickEnvelopeName(b.id)}
+                        >{b.name}</div>
+                        <div className='number'
+                        >
+                            {formatCurrencyNumber(FindMonthlyBalance(b.id))}
+                        </div>
+                        <div
+                            className={`number ${b.totalBalance > 0 ? 'possitivecurrency' : b.totalBalance < 0 ? 'negativecurrency' : ''}`}
+                        >
+                            {formatCurrencyNumber(b.totalBalance)}
+                        </div>
+                    </div>
+                ))
+            }
         </div>
     )
 }

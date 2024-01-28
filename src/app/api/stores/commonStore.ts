@@ -1,28 +1,31 @@
 import { makeAutoObservable, reaction } from "mobx";
 
 export default class CommonStore {
-    token: string | null = localStorage.getItem('jwt');
+    private _userToken = 'jwt';
+    private _token: string | null = localStorage.getItem(this._userToken);
     appLoaded = false;
 
     constructor() {
         makeAutoObservable(this);
 
         reaction(
-            () => this.token,
+            () => this._token,
             token => {
                 if (token) {
-                    localStorage.setItem('jwt', token)
+                    localStorage.setItem(this._userToken, token)
                 } else {
-                    localStorage.removeItem('jwt')
+                    localStorage.removeItem(this._userToken)
                 }
             }
         )
     }
 
     setToken = (token: string | null) => {
-        this.token = token;
+        this._token = token;
     }
-
+    get Token(){
+        return this._token;
+    }
     setAppLoaded = () => {
         this.appLoaded = true;
     }

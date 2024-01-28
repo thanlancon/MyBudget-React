@@ -28,7 +28,7 @@ function TransactionDetails() {
         totalBalance: 0,
         note: ''
     }
-    async function  clickDelete() {
+    async function clickDelete() {
         const confirmtext = prompt("Type 'yes' to confirm if you want to delete transaction!!!", 'no');
         if (confirmtext?.toLowerCase() === 'yes') {
             if (selectedItem) {
@@ -45,78 +45,56 @@ function TransactionDetails() {
                 <div className="transactionform">
                     <div className='flexcolumn'>
                         <label>Transaction Date</label>
-                        <div className="tranInput">
-                            <input type='text'
-                                value={dateToString(itemDetail.transactionDate)}
-                                readOnly
-                            />
-                        </div>
-                    </div>
-                    <div className='flexcolumn'>
-                        <label >Post Date</label>
-                        <div className="tranInput">
-                            <input type='text'
-                                value={dateToString(itemDetail.postDate)}
-                                readOnly
-                            />
-                        </div>
-                    </div>
-                    <div className='flexcolumn'>
-                        <label htmlFor='inflow'>Inflow</label>
-                        <input name='inflow'
-                            type='text'
-                            placeholder='Inflow'
-                            className='currencyinput'
-                            value={itemDetail.inflow}
+                        <input type='text'
+                            value={dateToString(itemDetail.transactionDate)}
                             readOnly
                         />
                     </div>
                     <div className='flexcolumn'>
-                        <label htmlFor='outflow'>Outflow</label>
-                        <div className="tranInput">
-                            <input name='outflow' placeholder='Outflow'
-                                className='currencyinput'
-                                value={itemDetail.outflow}
-                                readOnly
-                            />
-                        </div>
+                        <label >Post Date</label>
+                        <input type='text'
+                            value={dateToString(itemDetail.postDate)}
+                            readOnly
+                        />
                     </div>
                     <div className='flexcolumn'>
-                        <label htmlFor='envelopeId'>Envelope</label>
-                        <div className="tranInput">
-                            <input type='text' name='envelopeId' value={envelopes.find(x => x.value === itemDetail.envelopeId)?.text}
-                                readOnly
-                            ></input>
-                        </div>
+                        <label htmlFor=''>Amount</label>
+                        <input name='amount'
+                            type='text'
+                            placeholder=''
+                            className={`${itemDetail.inflow ? 'possitivecurrency' : 'negativecurrency'}`}
+                            value={itemDetail.inflow - itemDetail.outflow}
+                            readOnly
+                        />
                     </div>
                     <div className='flexcolumn'>
-                        <label htmlFor='payeeId'>Payee</label>
-                        <div className="tranInput">
-                            <input type='text' name='payeeId' value={payees.find(x => x.value === itemDetail.payeeId)?.text}
-                                readOnly
-                            ></input>
-                        </div>
+                        <label htmlFor='envelopeName'>Envelope</label>
+                        <input type='text' name='envelopeName' value={envelopes.find(x => x.value === itemDetail.envelopeId)?.text ?? ''}
+                            readOnly
+                        ></input>
                     </div>
                     <div className='flexcolumn'>
-                        <label htmlFor='bankId'>Bank</label>
-                        <div className="tranInput">
-                            <input type='text' name='bankId' value={bankAccounts.find(x => x.value === itemDetail.bankId)?.text}
-                                readOnly
-                            ></input>
-                        </div>
+                        <label htmlFor='payeeName'>Payee</label>
+                        <input type='text' name='payeeName' value={payees.find(x => x.value === itemDetail.payeeId)?.text ?? ''}
+                            readOnly
+                        ></input>
                     </div>
                     <div className='flexcolumn'>
-                        <label htmlFor='bankId_Transfer'>Bank Transfer</label>
-                        <div className="tranInput">
-                            <input type='text' name='bankId_Transfer' value={bankAccounts.find(x => x.value === itemDetail.bankId_Transfer)?.text}
-                                readOnly
-                            ></input>
-                        </div>
+                        <label htmlFor='bankName'>Bank</label>
+                        <input type='text' name='bankName' value={bankAccounts.find(x => x.value === itemDetail.bankId)?.text ?? ''}
+                            readOnly
+                        ></input>
+                    </div>
+                    <div className='flexcolumn'>
+                        <label htmlFor='bankId_TransferName'>Bank Transfer</label>
+                        <input type='text' name='bankId_TransferName' value={bankAccounts.find(x => x.value === itemDetail.bankId_Transfer)?.text ?? ''}
+                            readOnly
+                        ></input>
                     </div>
                     <div className='flexcolumn'>
                         <label htmlFor='outflow'>Note</label>
                         <textarea className='tranTextArea' name='note' placeholder='Note'
-                            value={itemDetail.note ? itemDetail.note : ''}
+                            value={itemDetail.note ?? ''}
                             readOnly
                         />
                     </div>
